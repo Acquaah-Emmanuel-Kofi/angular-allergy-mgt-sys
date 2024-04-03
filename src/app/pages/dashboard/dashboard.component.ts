@@ -23,10 +23,6 @@ export class DashboardComponent implements OnInit {
   fact!: allergyFact;
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   console.log("A minute has passed");
-      
-    // }, 3000);
     this.fact = this.getFact();
   }
 
