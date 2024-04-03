@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/layout/layout.component';
-import { allergyFacts } from '../../../assets/data/dummyData';
+import { allergyFacts } from '../../../assets/data/DummyData';
 
 interface allergyFact {
   id: number;
