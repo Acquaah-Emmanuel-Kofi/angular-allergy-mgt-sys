@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LayoutComponent } from '../../components/layout/layout.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-record-allergy',
@@ -17,7 +18,7 @@ export class RecordAllergyComponent {
   progressPercentage: number = 25;
   progress: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.stepperForm = this.formBuilder.group({
@@ -26,6 +27,10 @@ export class RecordAllergyComponent {
       step2Data: ['', Validators.required],
       // Add more form controls for additional steps as needed
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 
     nextStep(): void {
