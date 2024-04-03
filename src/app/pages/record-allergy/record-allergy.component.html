@@ -1,0 +1,298 @@
+<app-layout></app-layout>
+
+<!-- This is the section for the form stepper -->
+
+<div class="p-4 sm:ml-64">
+   <div class="p-4 mt-14">
+      <h5 class="mb-2 text-xl font-bold text-gray-900 dark:text-white">Allergy Assessment Form</h5>
+
+      <div class="w-full bg-gray-200 rounded-full h-1 mb-4 dark:bg-gray-700">
+         <div class="bg-teal-500 h-1.5 rounded-full dark:bg-teal-500" [style]="'width: ' + progress + '%'"></div>
+      </div>
+      <div class="stepper">
+         @switch (currentStep) {
+         @case (1) {
+         <div class="step">
+
+            <div
+               class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+               <h3 class="mb-4 font-bold">Medical History:</h3>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Have you
+                     ever experienced allergic reactions in the past? If yes, please describe.</label>
+                  <textarea id="message" rows="4"
+                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="Write your thoughts here..."></textarea>
+               </div>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you have
+                     any existing medical condition?</label>
+                  <div class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="bordered-radio-1"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes, I have a
+                        medical condition.</label>
+                  </div>
+                  <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="bordered-radio-1"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No, I don't have
+                        any.</label>
+                  </div>
+               </div>
+               <div class="formgroup">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Are you
+                     taking any medication?</label>
+                  <div class="flex items-center mb-4">
+                     <input id="default-radio-1" type="radio" value="" name="default-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="default-radio-1"
+                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                  </div>
+                  <div class="flex items-center">
+                     <input id="default-radio-1" type="radio" value="" name="default-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="default-radio-1"
+                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                  </div>
+               </div>
+            </div>
+
+            <button type="button" (click)="nextStep()"
+               class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Next</button>
+
+         </div>
+         }
+         @case (2) {
+         <div class="step">
+
+            <div
+               class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+               <h3 class="mb-4 font-bold">Allergy Symptoms:</h3>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Have you
+                     ever experienced any of these symptoms.</label>
+                  <ul
+                     class="items-center w-full mb-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="vue-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="vue-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Itching</label>
+                        </div>
+                     </li>
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="react-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="react-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sneezing</label>
+                        </div>
+                     </li>
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="angular-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="angular-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Swelling</label>
+                        </div>
+                     </li>
+                     <li class="w-full dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="laravel-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="laravel-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Coughing</label>
+                        </div>
+                     </li>
+                  </ul>
+                  <ul
+                     class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="vue-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="vue-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nasal
+                              Congestion</label>
+                        </div>
+                     </li>
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="react-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="react-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Rassh</label>
+                        </div>
+                     </li>
+                     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="angular-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="angular-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Shortness of
+                              Breath</label>
+                        </div>
+                     </li>
+                     <li class="w-full dark:border-gray-600">
+                        <div class="flex items-center ps-3">
+                           <input id="laravel-checkbox-list" type="checkbox" value=""
+                              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                           <label for="laravel-checkbox-list"
+                              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Others</label>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <div class="mb-4">
+                  <h3 class="mb-4 font-bold">Symptoms Severity:</h3>
+                  <select id="countries"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                     <option selected>Select</option>
+                     <option value="mild">Mild</option>
+                     <option value="moderate">Moderate</option>
+                     <option value="severe">Severe</option>
+                  </select>
+               </div>
+               <div>
+                  <h3 class="mb-4 font-bold">Symptom Duration:</h3>
+                  <div class="formgroup mb-4">
+                     <div class="relative max-w-sm">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                           <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                              <path
+                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                           </svg>
+                        </div>
+                        <input datepicker datepicker-orientation="bottom right" type="text"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Select date">
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <button type="button" (click)="prevStep()"
+               class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Previous</button>
+            <button type="button" (click)="nextStep()"
+               class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Next</button>
+
+         </div>
+         }
+         @case (3) {
+         <div class="step">
+
+            <div
+               class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">When do you
+                     typically experience these symptoms? (e.g., after eating certain foods, during specific
+                     seasons)</label>
+                  <textarea id="message" rows="2"
+                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="Write your thoughts here..."></textarea>
+               </div>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">How many
+                     times have you had a reaction?</label>
+                  <div class="flex items-center mb-4">
+                     <input id="default-radio-1" type="radio" value="" name="default-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="default-radio-1"
+                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Never</label>
+                  </div>
+                  <div class="flex items-center mb-4">
+                     <input id="default-radio-1" type="radio" value="" name="default-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="default-radio-1"
+                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Once</label>
+                  </div>
+                  <div class="flex items-center mb-4">
+                     <input id="default-radio-1" type="radio" value="" name="default-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">More
+                        than once</label>
+                  </div>
+               </div>
+               <div class="formgroup">
+                  <h3 class="mb-2 font-bold">Response To Treatment:</h3>
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you take
+                     any medications or treatments for your allergies? If yes, please specify the medications and their
+                     effectiveness</label>
+                  <textarea id="message" rows="2"
+                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="Write your thoughts here..."></textarea>
+               </div>
+            </div>
+
+            <button type="button" (click)="prevStep()"
+               class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Previous</button>
+            <button type="button" (click)="nextStep()"
+               class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Next</button>
+
+         </div>
+         }
+         @case (4) {
+         <div class="step">
+
+            <div
+               class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+               <h3 class="mb-4 font-bold">Life Style and Environmental Factors:</h3>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Are you
+                     exposed to any occupational or environmental allergens? If yes, please describe.</label>
+                  <textarea id="message" rows="2"
+                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="Write your thoughts here..."></textarea>
+               </div>
+               <div class="formgroup mb-4">
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Do you smoke
+                     or are you exposed to second hand smoke?</label>
+                  <div class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="bordered-radio-1"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes, I
+                        somke.</label>
+                  </div>
+                  <div class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="bordered-radio-1"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No, I don't
+                        smoke</label>
+                  </div>
+                  <div class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700">
+                     <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                     <label for="bordered-radio-1"
+                        class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No, but I'm
+                        exposed to second hand smoke</label>
+                  </div>
+               </div>
+               <div class="formgroup">
+                  <h3 class="mb-4 font-bold">Additional Information:</h3>
+                  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">If there is
+                     any other information you beleive is important for us to know about your allergy or health
+                     history?</label>
+                  <textarea id="message" rows="4"
+                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="Write your thoughts here..."></textarea>
+               </div>
+            </div>
+
+            <button type="button" (click)="prevStep()"
+               class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Previous</button>
+            <button type="button" (click)="submitForm()"
+               class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+         </div>
+         }
+         }
+      </div>
+   </div>
+</div>
