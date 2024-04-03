@@ -1,0 +1,67 @@
+<app-layout></app-layout>
+
+<div class="p-4 sm:ml-64">
+   <div class="p-4 mt-14">
+      <div class="py-4 px-5 h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800">
+         <div style="position: relative;" class="flex items-center justify-between">
+            <div>
+               <h1 class="text-2xl font-medium"><span class="text-teal-600">{{ greetUser() }}</span> John Doe!</h1>
+               <p class="mt-5">Welcome back! Stay Safe.</p>
+               <button type="button" (click)="navigateToView()"
+                  class="flex justify-center items-center py-2.5 me-2 mt-8 font-medium text-gray-900 focus:outline-none hover:text-teal-700 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Record
+                  an allergy
+                  <svg class="w-6 h-5 mt-1 flex items-center text-gray-800 dark:text-white hover:text-teal-700"
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m9 5 7 7-7 7" />
+                  </svg>
+               </button>
+            </div>
+            <div style="width: 220px; position: absolute; top: -15%; right: 5%;" class="">
+               <img style="width: 100%;" src="../../../assets/images/allergic-girl.png" alt="Doctors">
+            </div>
+         </div>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mb-4">
+         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+            <p class="text-2xl text-gray-400 dark:text-gray-500">
+               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 18 18">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                     d="M9 1v16M1 9h16" />
+               </svg>
+            </p>
+         </div>
+         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+            <p class="text-2xl text-gray-400 dark:text-gray-500">
+               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 18 18">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                     d="M9 1v16M1 9h16" />
+               </svg>
+            </p>
+         </div>
+         <div class="flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800">
+            <p class="text-2xl text-gray-400 dark:text-gray-500">
+               <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 18 18">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                     d="M9 1v16M1 9h16" />
+               </svg>
+            </p>
+         </div>
+      </div>
+      <div class="py-4 px-5 mb-4 rounded bg-teal-50 dark:bg-gray-800">
+         <h3 class="font-medium mb-2">Facts on Allergies</h3>
+         <div class="mb-4">
+            <h5 class="text-sm font-medium">{{getFact().title}}</h5>
+            <p>{{getFact().fact}}</p>
+         </div>
+         <div class="bg-teal-200 h-px w-full"></div>
+         <div class="mt-4">
+            <h5 class="text-sm font-medium">{{getFact().title}}</h5>
+            <p>{{getFact().fact}}</p>
+         </div>
+      </div>
+   </div>
+</div>
