@@ -5,7 +5,12 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'history-card-bg': "url('/assets/images/history-card-bg.jpg')",
+        'facts-bg': "url('/assets/images/patreon.jpeg')",
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin')
