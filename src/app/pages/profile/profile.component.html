@@ -1,0 +1,112 @@
+<app-layout></app-layout>
+
+<div class="p-4 sm:ml-64">
+    <div class="p-4 mt-14">
+        <h1 class="font-medium">Edit Profile</h1>
+        <p class="text-px text-gray-500">Complete the form below to complete your profile information.</p>
+
+        <div class="grid grid-cols-2 gap-24 flex items-center mt-8">
+
+            <form class="">
+                <div class="grid grid-cols-2 gap-4 mb-5">
+                    <div>
+                        <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            First name</label>
+                        <input type="text" id="firstname"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="John" required />
+                    </div>
+                    <div>
+                        <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Last name</label>
+                        <input type="text" id="lastname"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Doe" required />
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-5">
+                    <div>
+                        <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Date of birth</label>
+                        <input type="date" id="dob"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="name@flowbite.com" required />
+                    </div>
+                    <div>
+                        <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            Gender</label>
+                        <div class="flex mt-4">
+                            <div class="flex items-center me-4">
+                                <input id="inline-radio" type="radio" value="" name="inline-radio-group"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="inline-radio"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
+                            </div>
+                            <div class="flex items-center me-4">
+                                <input id="gender" type="radio" value="" name="inline-radio-group"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="gender"
+                                    class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Email</label>
+                    <input type="email" id="email"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="john@allergus.com" required />
+                </div>
+                <div class="mb-5">
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Phone</label>
+                    <input type="phone" id="phone"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="+233 559 045 947" required />
+                </div>
+                <div class="flex">
+                    <button type="button"
+                        class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                    <button type="button"
+                        class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Save</button>
+
+                </div>
+            </form>
+
+            <div class="flex flex-col items-center gap-8">
+
+                <h2 class="font-bold text-2xl">Profile Picture</h2>
+                <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-48 h-48 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6 relative">
+
+                            <div
+                                class="w-10 h-10 shadow flex justify-center items-center bg-white rounded-full absolute bottom-[-70px] right-[-85px]">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+
+                        </div>
+                        <input id="dropzone-file" type="file" class="hidden" />
+                    </label>
+                </div>
+
+                <div>
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
+                            to
+                            upload</span> or drag and drop</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
