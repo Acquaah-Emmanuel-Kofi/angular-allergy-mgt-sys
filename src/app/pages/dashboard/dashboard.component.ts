@@ -2,17 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutComponent } from '../../components/layout/layout.component';
 import { allergyFacts } from '../../../assets/data/DummyData';
-
-interface allergyFact {
-  id: number;
-  title: string;
-  fact: string;
-}
+import { AllergyFact } from '../../models/allergies.model';
+import { RecenthistorycardComponent } from '../../components/recenthistorycard/recenthistorycard.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [LayoutComponent],
+  imports: [LayoutComponent, RecenthistorycardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -20,13 +16,13 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  fact!: allergyFact;
+  fact!: AllergyFact;
 
   ngOnInit(): void {
     this.fact = this.getFact();
   }
 
-  allergyFacts: Array<allergyFact> | undefined;
+  allergyFacts: AllergyFact[] = allergyFacts;
 
   navigateToView(): void {
     this.router.navigate(['/record-allergy']);
