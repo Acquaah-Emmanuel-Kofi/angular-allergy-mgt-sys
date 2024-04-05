@@ -30,7 +30,7 @@ export class RecordAllergyComponent {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 
     nextStep(): void {
