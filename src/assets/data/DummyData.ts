@@ -100,4 +100,25 @@ export const allergyFacts = [
       fact: "Environmental factors, including pollution, climate change, and changes in vegetation, influence the prevalence and severity of allergies in Africa."
     }
   ];
+
+  export const history = [
+    {
+      id: 1,
+      title: "Healthcare System",
+      description: "Lorem Ipsum of truth and withoutTruth in the world of theitute...",
+      date: "2020-01-01",
+    },
+    {
+      id: 2,
+      title: "Healthcare",
+      description: "Lorem Ipsum of eomse and withoutTruth in the world of theitute...",
+      date: "2020-06-11",
+    },
+    {
+      id: 3,
+      title: "System",
+      description: "Lorem sd of truth and withoutTruth in the world of theitute...",
+      date: "2020-11-03",
+    }
+  ]
   
