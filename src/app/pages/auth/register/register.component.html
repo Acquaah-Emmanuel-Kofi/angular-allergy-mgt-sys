@@ -1,0 +1,53 @@
+<section class="flex h-screen">
+    <div id="left-col" class="bg-teal-100 flex items-center justify-center">
+        <img src="../../../../assets/images/pana.svg" alt="Allergy girl">
+    </div>
+    <div id="right-col" class="flex flex-col max-w-md mx-auto justify-center">
+        <h3 class="text-black font-bold text-xl">Sign Up</h3>
+        <p class="text-sm mb-4 mt-2">Fill up the form below to sign up and get Started.</p>
+        <form class="">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        First name</label>
+                    <input type="text" id="firstname"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                        placeholder="John" required />
+                </div>
+                <div>
+                    <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Last name</label>
+                    <input type="text" id="lastname"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                        placeholder="Doe" required />
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Email</label>
+                <input type="email" id="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    placeholder="john@allergus.com" required />
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Password</label>
+                <input type="password" id="password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    required />
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Confirm Password</label>
+                <input type="password" id="password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    required />
+            </div>
+            <button type="button"
+                class="bg-teal-300 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5">Create
+                account</button>
+            <p class="mt-4 text-sm">Already have an account? <a routerLink="/login" class="text-teal-500">Log In</a>
+            </p>
+        </form>
+    </div>
+</section>
