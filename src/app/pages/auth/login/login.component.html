@@ -1,0 +1,36 @@
+<section class="flex h-screen">
+    <div id="left-col" class="bg-teal-100 flex items-center justify-center">
+        <img src="../../../../assets/images/pana.svg" alt="Allergy girl">
+    </div>
+    <div id="right-col" class="flex flex-col max-w-md mx-auto justify-center">
+        <h3 class="text-black font-bold text-xl">Sign In</h3>
+        <p class="text-sm mb-4 mt-2">Hello there! Glad to have you back.</p>
+        <form class="">
+            <div class="mb-4">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Email</label>
+                <input type="email" id="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    placeholder="john@allergus.com" required />
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Password</label>
+                <input type="password" id="password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    required />
+            </div>
+
+            <div class="mb-4 flex justify-between items-center">
+                <span>Remember me</span>
+                <a routerLink="/forgot-password" class="text-px text-teal-500">Forgot Password?</a>
+            </div>
+
+            <button type="button" (click)="navigateToDashboard()"
+                class="bg-teal-300 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5">Create
+                account</button>
+            <p class="mt-4 text-sm">Don’t have an account? <a routerLink="/register" class="text-teal-500">Register</a>
+            </p>
+        </form>
+    </div>
+</section>
