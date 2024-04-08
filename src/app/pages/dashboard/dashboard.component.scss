@@ -1,0 +1,11 @@
+$breakpoint-tablet: 640px;
+@media (max-width: $breakpoint-tablet) {
+    #img {
+        display: none;
+    }
+
+    #recent-history-cards {
+        display: flex;
+        flex-direction: column;
+    }
+}
