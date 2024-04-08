@@ -9,3 +9,14 @@
 #right-col {
     width: 60%;
 }
+
+$breakpoint-tablet: 640px;
+@media (max-width: $breakpoint-tablet) {
+    #left-col {
+        display: none;
+    }
+
+    #right-col {
+        width: 90%;
+    }
+}
