@@ -1,0 +1,7 @@
+$breakpoint-tablet: 640px;
+@media (max-width: $breakpoint-tablet) {
+    #profle-div {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
