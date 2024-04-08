@@ -9,7 +9,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent }, // Default route
-    { path: 'dashboard', component: DashboardComponent }, // Default route
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'record-allergy', component: RecordAllergyComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'profile', component: ProfileComponent },
