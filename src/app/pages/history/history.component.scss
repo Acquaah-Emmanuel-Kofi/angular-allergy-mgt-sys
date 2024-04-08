@@ -1,0 +1,10 @@
+$breakpoint-tablet: 640px;
+@media (max-width: $breakpoint-tablet) {
+  #header {
+    flex-direction: column-reverse;
+  }
+
+  #form {
+    width: 100%;
+  }
+}
