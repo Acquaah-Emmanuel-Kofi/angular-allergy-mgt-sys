@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ToasterComponent } from '../toaster/toaster.component';
 import { ThemeService } from '../../services/theme/theme.service';
+import { LogoComponent } from '../../shared/logo/logo.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports:[ RouterLink, RouterLinkActive, ToasterComponent ],
+  imports:[ LogoComponent ,RouterLink, RouterLinkActive, ToasterComponent ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
