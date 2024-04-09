@@ -11,21 +11,12 @@
         <h3 class="text-black font-bold text-xl">Sign Up</h3>
         <p class="text-sm mb-4 mt-2">Fill up the form below to sign up and get Started.</p>
         <form class="">
-            <div class="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        First name</label>
-                    <input type="text" id="firstname"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
-                        placeholder="John" required />
-                </div>
-                <div>
-                    <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Last name</label>
-                    <input type="text" id="lastname"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
-                        placeholder="Doe" required />
-                </div>
+            <div class="mb-4">
+                <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Username</label>
+                <input type="text" id="username"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                    placeholder="John Doe" required />
             </div>
             <div class="mb-4">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -48,6 +39,11 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
                     required />
             </div>
+            <div class="flex items-center mb-4">
+                <input id="checkbox-2" type="checkbox" value="" class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="checkbox-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree to the <a href="#" class="text-teal-600 hover:underline dark:text-teal-500">terms and conditions</a>.</label>
+            </div>
+          
             <button type="button"
                 class="bg-teal-300 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5">Create
                 account</button>

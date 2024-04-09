@@ -5,10 +5,10 @@
         <h1 class="font-medium dark:text-white">Edit Profile</h1>
         <p class="text-px text-gray-500">Complete the form below to complete your profile information.</p>
 
-        <div id="profle-div" class="grid grid-cols-2 gap-24 flex items-center mt-8">
+        <div id="profle-div" class="grid grid-cols-2 gap-24 flex  mt-8">
 
             <form class="">
-                <div class="grid grid-cols-2 gap-4 mb-5">
+                <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             First name</label>
@@ -24,7 +24,7 @@
                             placeholder="Doe" required />
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-5">
+                <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Date of birth</label>
@@ -51,14 +51,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-5">
+                <div class="mb-4">
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Username</label>
+                    <input type="text" id="username"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
+                        placeholder="John Doe" required />
+                </div>
+                <div class="mb-4">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Email</label>
                     <input type="email" id="email"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                         placeholder="john@allergus.com" required />
                 </div>
-                <div class="mb-5">
+                <div class="mb-4">
                     <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                         Phone</label>
                     <input type="phone" id="phone"
