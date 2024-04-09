@@ -10,28 +10,34 @@
 
         <h3 class="text-black font-bold text-xl">Sign In</h3>
         <p class="text-sm mb-4 mt-2">Hello there! Glad to have you back.</p>
-        <form>
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
             <div class="mb-4">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Email</label>
-                <input type="email" id="email"
+                <input type="email" id="email" name="email" ngModel
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
                     placeholder="john@allergus.com" required />
             </div>
             <div class="mb-4">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                     Password</label>
-                <input type="password" id="password"
+                <input type="password" id="password" name="password" ngModel
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5"
                     required />
             </div>
 
             <div class="mb-4 flex justify-between items-center">
-                <span>Remember me</span>
+                <!-- <span>Remember me</span> -->
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                      <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:bg-teal-500 focus:ring-teal-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-teal-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+                    </div>
+                    <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+                  </div>
                 <a routerLink="/forgot-password" class="text-px text-teal-500">Forgot Password?</a>
             </div>
 
-            <button type="button" (click)="navigateToDashboard()"
+            <button type="submit" [disabled]="!loginForm.valid"
                 class="bg-teal-300 border border-gray-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5">Create
                 account</button>
             <p class="mt-4 text-sm">Don’t have an account? <a routerLink="/register" class="text-teal-500">Register</a>
