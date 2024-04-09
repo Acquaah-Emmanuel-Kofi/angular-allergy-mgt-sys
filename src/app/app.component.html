@@ -1,2 +1,7 @@
-<app-layout></app-layout>
+<ng-container>
+    @if (!isAuthenticated()) {
+        <app-layout></app-layout>
+    }
+</ng-container>
+<app-toaster></app-toaster>
 <router-outlet></router-outlet>
