@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { History } from '../../models/allergies.model';
+import { History } from '../../interfaces/allergies';
 
 @Component({
   selector: 'app-historycard',
