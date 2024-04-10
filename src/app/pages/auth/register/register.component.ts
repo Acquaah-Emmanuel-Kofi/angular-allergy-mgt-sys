@@ -11,11 +11,12 @@ import { createPasswordStrengthValidator } from '../../../utility/validators/aut
 import { checkUsernameValidator } from '../../../utility/validators/auth/username.validator';
 import { ToasterService } from '../../../components/toaster/toaster.service';
 import { confirmPasswordValidator } from '../../../utility/validators/auth/confirm-password.validator';
+import { AlertComponent } from '../../../components/alert/alert.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, LogoComponent, ReactiveFormsModule, FormsModule],
+  imports: [RouterLink, LogoComponent, ReactiveFormsModule, FormsModule, AlertComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -28,6 +29,7 @@ export class RegisterComponent {
 
   formIsValid = signal(true);
   isLoading = signal(false);
+  errorMessage = signal("");
 
   form = this.formBuilder.group({
     username: [
@@ -80,11 +82,9 @@ export class RegisterComponent {
   }
 
   register() {
+    this.formIsValid.set(false);
+    this.errorMessage.set("The form is not valid. Please correct the errors in the form before submitting");
     this.isLoading.set(true);
     console.log(this.form.value);
-  }
-
-  closeAlert() {
-    this.formIsValid.set(true);
   }
 }
