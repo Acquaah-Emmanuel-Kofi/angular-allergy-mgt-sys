@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LayoutComponent } from '../../components/layout/layout.component';
 import { allergyFacts } from '../../../assets/data/DummyData';
-import { AllergyFact } from '../../models/allergies.model';
 import { RecenthistorycardComponent } from '../../components/recenthistorycard/recenthistorycard.component';
+import { AllergyFact } from '../../interfaces/allergies';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [LayoutComponent, RecenthistorycardComponent],
+  imports: [RecenthistorycardComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -16,22 +15,26 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  fact!: AllergyFact;
+  randomFact_1 = this.getFact();
+  randomFact_2 = this.getFact();
+  
 
   ngOnInit(): void {
-    this.fact = this.getFact();
+    this.randomFact_1 = this.getFact();
+    this.randomFact_2 = this.getFact();
   }
 
   allergyFacts: AllergyFact[] = allergyFacts;
 
-  navigateToView(): void {
+  recordAllergy(): void {
     this.router.navigate(['/record-allergy']);
   }
   
+  // Method to return a greeting to the user depending on the current time.
   greetUser() {   
-    const currentTime = new Date();
-    const hours = currentTime.getHours();
-    let greeting = 'Good ';
+    const currentTime: Date = new Date();
+    const hours: number = currentTime.getHours();
+    let greeting: string = 'Good ';
     
     if (hours < 12) {
         greeting += 'morning, ';
@@ -46,12 +49,12 @@ export class DashboardComponent implements OnInit {
 
 
   getFact() {
+    return allergyFacts[this.getRandomFactIndex()]; 
+  }
 
-    let randomFact = Math.floor(Math.random() * allergyFacts.length - 1);
-
-    let fact = allergyFacts[randomFact];
-
-    return fact;    
+  getRandomFactIndex() {
+    let randomFact: number = Math.floor(Math.random() * allergyFacts.length);
+    return randomFact;
   }
 
 
