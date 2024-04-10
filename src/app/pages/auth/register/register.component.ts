@@ -95,23 +95,31 @@ export class RegisterComponent {
   }
 
   register() {
-    let formData = this.form.value;
-
     this.checkTermsAndConditions();
+
+    let formData = this.form.value;
 
     if (this.form.valid) {
       this.isLoading.set(true);
 
-      this._authService.registerUser(formData).subscribe((response) => {
-        this.isLoading.set(false);
+      this._authService.registerUser(formData).subscribe({
+        next: (response) => {
+          this.isLoading.set(false);
 
-        if ((response.status = 'success')) {
-          this.form.reset();
-          this._toast.showSuccess('Account registered successfully!');
-          this._router.navigate(['/login']);
-        } else {
-          this._toast.showError('Username already exists!');
-        }
+          if (response.status === 'success') {
+            this.form.reset();
+            this._toast.showSuccess('Account registered successfully!');
+            this._router.navigate(['/login']);
+          } else {
+            this._toast.showError('Username already exists!');
+          }
+        },
+        error: () => {
+          this.isLoading.set(false);
+          this._toast.showError(
+            'Something went wrong! Please, check your internet and try again.'
+          );
+        },
       });
     }
   }
