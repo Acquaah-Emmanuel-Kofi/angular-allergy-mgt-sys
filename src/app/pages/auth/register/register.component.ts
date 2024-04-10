@@ -17,7 +17,13 @@ import { ToasterService } from '../../../components/toaster/toaster.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, LogoComponent, ReactiveFormsModule, FormsModule, AlertComponent],
+  imports: [
+    RouterLink,
+    LogoComponent,
+    ReactiveFormsModule,
+    FormsModule,
+    AlertComponent,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -31,7 +37,7 @@ export class RegisterComponent {
 
   formIsValid = signal(true);
   isLoading = signal(false);
-  errorMessage = signal("");
+  errorMessage = signal('');
 
   form = this._formBuilder.group({
     username: [
@@ -53,7 +59,10 @@ export class RegisterComponent {
         createPasswordStrengthValidator(),
       ],
     ],
-    confirmPassword: ['', [Validators.required, confirmPasswordValidator('password')]],
+    confirmPassword: [
+      '',
+      [Validators.required, confirmPasswordValidator('password')],
+    ],
     agreedTermsAndConditions: [
       false,
       [Validators.required, Validators.requiredTrue],
@@ -73,14 +82,14 @@ export class RegisterComponent {
   }
 
   checkTermsAndConditions() {
-    if(this.form.controls['agreedTermsAndConditions'].errors) {
+    if (this.form.controls['agreedTermsAndConditions'].errors) {
       this.formIsValid.set(false);
 
       setTimeout(() => {
         this.formIsValid.set(true);
       }, 3000);
-      
-      this.errorMessage.set("You must agree to the terms and conditions");
+
+      this.errorMessage.set('You must agree to the terms and conditions');
       return;
     }
   }
@@ -88,27 +97,22 @@ export class RegisterComponent {
   register() {
     let formData = this.form.value;
 
-    this.checkTermsAndConditions();    
+    this.checkTermsAndConditions();
 
     if (this.form.valid) {
-      
       this.isLoading.set(true);
 
-      this._authService.registerUser(formData).subscribe(response => {        
-        
+      this._authService.registerUser(formData).subscribe((response) => {
         this.isLoading.set(false);
 
-        if (response.status = 'success') {
-
+        if ((response.status = 'success')) {
           this.form.reset();
-          this._toast.showSuccess("Account registered successfully!");
+          this._toast.showSuccess('Account registered successfully!');
           this._router.navigate(['/login']);
-
-        }else {
-          this._toast.showError("Username already exists!");
+        } else {
+          this._toast.showError('Username already exists!');
         }
-      })
+      });
     }
   }
-
 }
