@@ -15,6 +15,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  // Retrieve username to greet on dashboard from local storage
+  username = localStorage.getItem('USERNAME');
+
   randomFact_1 = this.getFact();
   randomFact_2 = this.getFact();
   
@@ -52,6 +55,7 @@ export class DashboardComponent implements OnInit {
     return allergyFacts[this.getRandomFactIndex()]; 
   }
 
+  // Generate a random index number to get an allergy fact.
   getRandomFactIndex() {
     let randomFact: number = Math.floor(Math.random() * allergyFacts.length);
     return randomFact;
