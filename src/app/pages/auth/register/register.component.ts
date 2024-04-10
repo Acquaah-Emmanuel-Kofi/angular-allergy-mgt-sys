@@ -9,9 +9,10 @@ import {
 } from '@angular/forms';
 import { createPasswordStrengthValidator } from '../../../utility/validators/auth/password-strength.validator';
 import { checkUsernameValidator } from '../../../utility/validators/auth/username.validator';
-import { ToasterService } from '../../../components/toaster/toaster.service';
 import { confirmPasswordValidator } from '../../../utility/validators/auth/confirm-password.validator';
 import { AlertComponent } from '../../../components/alert/alert.component';
+import { AuthenticationService } from '../../../services/auth/authentication.service';
+import { ToasterService } from '../../../components/toaster/toaster.service';
 
 @Component({
   selector: 'app-register',
@@ -22,16 +23,17 @@ import { AlertComponent } from '../../../components/alert/alert.component';
 })
 export class RegisterComponent {
   constructor(
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private toast: ToasterService
+    private _router: Router,
+    private _formBuilder: FormBuilder,
+    private _toast: ToasterService,
+    private _authService: AuthenticationService
   ) {}
 
   formIsValid = signal(true);
   isLoading = signal(false);
   errorMessage = signal("");
 
-  form = this.formBuilder.group({
+  form = this._formBuilder.group({
     username: [
       '',
       {
@@ -40,13 +42,6 @@ export class RegisterComponent {
           Validators.minLength(3),
           checkUsernameValidator(),
         ],
-        updateOn: 'blur',
-      },
-    ],
-    email: [
-      '',
-      {
-        validators: [Validators.required, Validators.email],
         updateOn: 'blur',
       },
     ],
@@ -69,10 +64,6 @@ export class RegisterComponent {
     return this.form.controls['username'];
   }
 
-  get email() {
-    return this.form.controls['email'];
-  }
-
   get password() {
     return this.form.controls['password'];
   }
@@ -81,10 +72,43 @@ export class RegisterComponent {
     return this.form.controls['confirmPassword'];
   }
 
-  register() {
-    this.formIsValid.set(false);
-    this.errorMessage.set("The form is not valid. Please correct the errors in the form before submitting");
-    this.isLoading.set(true);
-    console.log(this.form.value);
+  checkTermsAndConditions() {
+    if(this.form.controls['agreedTermsAndConditions'].errors) {
+      this.formIsValid.set(false);
+
+      setTimeout(() => {
+        this.formIsValid.set(true);
+      }, 3000);
+      
+      this.errorMessage.set("You must agree to the terms and conditions");
+      return;
+    }
   }
+
+  register() {
+    let formData = this.form.value;
+
+    this.checkTermsAndConditions();    
+
+    if (this.form.valid) {
+      
+      this.isLoading.set(true);
+
+      this._authService.registerUser(formData).subscribe(response => {        
+        
+        this.isLoading.set(false);
+
+        if (response.status = 'success') {
+
+          this.form.reset();
+          this._toast.showSuccess("Account registered successfully!");
+          this._router.navigate(['/login']);
+
+        }else {
+          this._toast.showError("Username already exists!");
+        }
+      })
+    }
+  }
+
 }
