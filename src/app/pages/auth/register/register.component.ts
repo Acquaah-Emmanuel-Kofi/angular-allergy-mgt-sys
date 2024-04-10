@@ -117,7 +117,7 @@ export class RegisterComponent {
         error: () => {
           this.isLoading.set(false);
           this._toast.showError(
-            'Something went wrong! Please, check your internet and try again.'
+            'Something went wrong. Please, try again!'
           );
         },
       });
