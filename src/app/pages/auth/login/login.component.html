@@ -10,6 +10,12 @@
       <app-logo></app-logo>
     </div>
 
+    @if (!formIsValid()) {
+      <ng-container>
+        <app-alert [message]="errorMessage()"></app-alert>
+      </ng-container>
+      }
+
     <h3 class="text-black font-bold text-xl">Sign In</h3>
     <p class="text-sm mb-4 mt-2">Hello there! Glad to have you back.</p>
     <form [formGroup]="form" (ngSubmit)="login()">

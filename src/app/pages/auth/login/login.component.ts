@@ -7,18 +7,21 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AlertComponent } from '../../../components/alert/alert.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, LogoComponent, FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, LogoComponent, FormsModule, ReactiveFormsModule, AlertComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   constructor(public router: Router, private formBuilder: FormBuilder) {}
 
+  formIsValid = signal(true);
   isLoading = signal(false);
+  errorMessage = signal("");
 
   form = this.formBuilder.group({
     email: [
@@ -40,6 +43,8 @@ export class LoginComponent {
   }
 
   login() {
+    this.formIsValid.set(false);
+    this.errorMessage.set("Invalid Credentials");
     this.isLoading.set(true);
     console.log(this.form.value);
 
