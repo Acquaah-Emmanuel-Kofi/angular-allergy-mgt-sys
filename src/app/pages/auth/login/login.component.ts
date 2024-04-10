@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LogoComponent } from '../../../shared/logo/logo.component';
 import {
@@ -11,6 +11,7 @@ import { AlertComponent } from '../../../components/alert/alert.component';
 import { checkUsernameValidator } from '../../../utility/validators/auth/username.validator';
 import { ToasterService } from '../../../components/toaster/toaster.service';
 import { AuthenticationService } from '../../../services/auth/authentication.service';
+import { RememberMeService } from '../../../services/auth/remember-me.service';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +26,33 @@ import { AuthenticationService } from '../../../services/auth/authentication.ser
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
     private _toast: ToasterService,
-    private _authService: AuthenticationService
+    private _authService: AuthenticationService,
+    private _rememberMeService: RememberMeService
   ) {}
+
+  ngOnInit() {
+    // Retrieve stored credentials and set them in the form
+    const storedCredentials = this._rememberMeService.getStoredCredentials();
+    if (storedCredentials) {
+      this.form.patchValue(storedCredentials);
+    }
+
+    // Check if the 'rememberMe' control exists before subscribing to changes
+    const rememberMeControl = this.form.controls['rememberMe'];
+
+    if (rememberMeControl) {
+      rememberMeControl.valueChanges.subscribe((value) => {
+        if (value !== null) {
+          this._rememberMeService.setRememberMe(value);
+        }
+      });
+    }
+  }
 
   formIsValid = signal(true);
   isLoading = signal(false);
@@ -46,6 +67,7 @@ export class LoginComponent {
       },
     ],
     password: ['', [Validators.required]],
+    rememberMe: [this._rememberMeService.getRememberMe()],
   });
 
   get username() {
@@ -56,8 +78,12 @@ export class LoginComponent {
     return this.form.controls['password'];
   }
 
+  get rememberMe() {
+    return this.form.controls['rememberMe'];
+  }
+
   checkFormValidity() {
-    if (!this.form.valid) {
+    if (!this.username.value || !this.password.value) {
       this.formIsValid.set(false);
 
       setTimeout(() => {
@@ -68,17 +94,27 @@ export class LoginComponent {
     }
   }
 
+  handleRememberMeChange(rememberMeValue: any): void {
+    if (!rememberMeValue) {
+      this._rememberMeService.deleteStoredCredentials();
+    } else {
+      this._rememberMeService.saveCredentials(this.form.value);
+    }
+  }
+
   login() {
     this.checkFormValidity();
 
-    let formData = this.form.value;
+    let formData = this.form.value;    
 
-    if (this.form.valid) {
+    if (this.username.value && this.password.value) {
       this.isLoading.set(true);
 
       this._authService.loginUser(formData).subscribe({
         next: (response) => {
           this.isLoading.set(false);
+
+          this.handleRememberMeChange(this.rememberMe.value); 
 
           if (response.status === 'success') {
             this.form.reset();
@@ -92,7 +128,7 @@ export class LoginComponent {
         error: () => {
           this.isLoading.set(false);
           this._toast.showError(
-            'Something went wrong! Please, check your internet and try again.'
+            'Something went wrong. Please, try again!'
           );
         },
       });
