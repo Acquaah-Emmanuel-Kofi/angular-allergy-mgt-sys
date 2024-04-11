@@ -1,0 +1,175 @@
+<form class="step" [formGroup]="formStepper3" (ngSubmit)="nextStep()">
+  <div
+    class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <div class="formgroup mb-4">
+      <label
+        for="whenSymptomsOccur"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >When do you typically experience these symptoms?</label
+      >
+      <ul
+        class="items-center w-full mb-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <li
+          class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+        >
+          <div class="flex items-center ps-3">
+            <input
+              id="eating"
+              type="checkbox"
+              value=""
+              formControlName="whenSymptomsOccur"
+              class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+            <label
+              for="eating"
+              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >After eating certain foods</label
+            >
+          </div>
+        </li>
+        <li
+          class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+        >
+          <div class="flex items-center ps-3">
+            <input
+              id="seasons"
+              type="checkbox"
+              value=""
+              formControlName="whenSymptomsOccur"
+              class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+            <label
+              for="seasons"
+              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >During specific seasons</label
+            >
+          </div>
+        </li>
+      </ul>
+      <ul
+        class="items-center w-full mb-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+      >
+        <li
+          class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+        >
+          <div class="flex items-center ps-3">
+            <input
+              id="pets"
+              type="checkbox"
+              value=""
+              formControlName="whenSymptomsOccur"
+              class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+            <label
+              for="pets"
+              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >After exposure to pets</label
+            >
+          </div>
+        </li>
+        <li
+          class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+        >
+          <div class="flex items-center ps-3">
+            <input
+              id="environments"
+              type="checkbox"
+              value=""
+              formControlName="whenSymptomsOccur"
+              class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 rounded focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+            <label
+              for="experiencedSymptoms"
+              class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >When in certain environments</label
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="formgroup mb-4">
+      <label
+        for="message"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >How many times have you had a reaction?</label
+      >
+      <div class="flex items-center mb-4">
+        <input
+          id="timesOfReaction"
+          type="radio"
+          value="Never"
+          name="timesOfReaction"
+          formControlName="timesOfReaction"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="timesOfReaction"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Never</label
+        >
+      </div>
+      <div class="flex items-center mb-4">
+        <input
+          id="timesOfReaction"
+          type="radio"
+          value="Once"
+          name="timesOfReaction"
+          formControlName="timesOfReaction"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="timesOfReaction"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Once</label
+        >
+      </div>
+      <div class="flex items-center mb-4">
+        <input
+          id="timesOfReaction"
+          type="radio"
+          value="More than once"
+          name="timesOfReaction"
+          formControlName="timesOfReaction"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="timesOfReaction"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >More than once</label
+        >
+      </div>
+    </div>
+    <div class="formgroup">
+      <h3 class="mb-2 font-bold dark:text-white">Response To Treatment:</h3>
+      <label
+        for="medicationsOrTreatments"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Do you take any medications or treatments for your allergies? If yes,
+        please specify the medications and their effectiveness</label
+      >
+      <textarea
+        id="medicationsOrTreatments"
+        rows="2"
+        formControlName="medicationsOrTreatments"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+        placeholder="Write your thoughts here..."
+      ></textarea>
+    </div>
+  </div>
+
+  <button
+    type="button"
+    (click)="prevStep()"
+    class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+  >
+    Previous
+  </button>
+  <button
+    type="submit"
+    class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
+  >
+    Next
+  </button>
+</form>
