@@ -81,20 +81,8 @@ export class RegisterComponent {
     return this.form.controls['confirmPassword'];
   }
 
-  checkTermsAndConditions() {
-    if (this.form.controls['agreedTermsAndConditions'].errors) {
-      this.formIsValid.set(false);
-
-      setTimeout(() => {
-        this.formIsValid.set(true);
-      }, 3000);
-
-      this.errorMessage.set('You must agree to the terms and conditions');
-      return;
-    }
-  }
-
   register() {
+    this.checkFormValidity();
     this.checkTermsAndConditions();
 
     let formData = this.form.value;
@@ -108,10 +96,10 @@ export class RegisterComponent {
 
           if (response.status === 'success') {
             this.form.reset();
-            this._toast.showSuccess('Account registered successfully!');
+            this._toast.showSuccess('Registered Successfully!');
             this._router.navigate(['/login']);
           } else {
-            this._toast.showError('Username already exists!');
+            this._toast.showError('User already exists!');
           }
         },
         error: () => {
@@ -121,6 +109,31 @@ export class RegisterComponent {
           );
         },
       });
+    }
+  }
+
+  checkFormValidity() {
+    if (!this.form.valid) {
+      this.formIsValid.set(false);
+
+      setTimeout(() => {
+        this.formIsValid.set(true);
+      }, 3000);
+
+      this.errorMessage.set('Invalid form! All fields are required.');
+    }
+  }
+
+  checkTermsAndConditions() {
+    if (this.form.controls['agreedTermsAndConditions'].errors) {
+      this.formIsValid.set(false);
+
+      setTimeout(() => {
+        this.formIsValid.set(true);
+      }, 3000);
+
+      this.errorMessage.set('You must agree to the terms and conditions');
+      return;
     }
   }
 }
