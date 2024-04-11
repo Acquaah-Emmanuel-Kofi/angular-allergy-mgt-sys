@@ -1,63 +1,82 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LayoutComponent } from '../../components/layout/layout.component';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToasterService } from '../../components/toaster/toaster.service';
+import { FormStep1Component } from './form-step1/form-step1.component';
+import { FormStep2Component } from './form-step2/form-step2.component';
+import { FormStep4Component } from './form-step4/form-step4.component';
+import { FormStep3Component } from './form-step3/form-step3.component';
 
 @Component({
   selector: 'app-record-allergy',
   standalone: true,
-  imports: [LayoutComponent],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    FormStep1Component,
+    FormStep2Component,
+    FormStep3Component,
+    FormStep4Component,
+  ],
   templateUrl: './record-allergy.component.html',
-  styleUrl: './record-allergy.component.scss'
+  styleUrl: './record-allergy.component.scss',
 })
 export class RecordAllergyComponent {
-  appName = 'Aller Gus';
-
-  stepperForm: FormGroup | undefined;
   currentStep: number = 1;
-  progressPercentage: number = 25;
+  progressCount: number = 33.33333333333333;
   progress: number = 0;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(
+    private _router: Router,
+    private _toast: ToasterService
+  ) {}
 
-  ngOnInit(): void {
-    this.stepperForm = this.formBuilder.group({
-      // Define form controls for each step
-      step1Data: ['', Validators.required],
-      step2Data: ['', Validators.required],
-      // Add more form controls for additional steps as needed
-    });
-  }
+  formData: any = {};
 
   goBack(): void {
-    this.router.navigate(['/dashboard']);
+    this._router.navigate(['/dashboard']);
   }
 
-    nextStep(): void {
-      console.log("Clicked to next step");
-      
-      if (this.currentStep < 4) {
-        this.progress += 33.33333333333333;
-        this.currentStep++;
-      }
+  nextStep(formStepperData: FormGroup): void {
+    if (this.currentStep < 4) {
+      this.progress += this.progressCount;
+      this.currentStep++;
+
+      this.formData = { ...this.formData, ...formStepperData };
     }
-  
-    prevStep(): void {
-      console.log("Clicked to previous step");
+
+    if (this.currentStep === 4) {
+      console.log("Last Form");
       
-      if (this.currentStep > 1) {
-        this.progress -= 33.33333333333333;
-        this.currentStep--;
-      }
+      console.log(this.formData);
     }
-  
-    submitForm(): void {
-      console.log("Clicked to submit");
-      
-      // if (this.stepperForm.valid) {
-      //   // Submit form data
-      // } else {
-      //   // Handle form validation errors
-      // }
+  }
+
+  prevStep(): void {    
+    if (this.currentStep > 1) {
+      this.progress -= this.progressCount;
+      this.currentStep--;
     }
+  }
+
+  submitForm(): void {
+    console.log('Clicked to submit');
+    console.log(this.formData);
+    this.removeFormDraft();
+
+    // this._toast.showSuccess('Success!');
+  }
+
+  removeFormDraft(): void {
+    localStorage.removeItem('STEP_1');
+    localStorage.removeItem('STEP_2');
+    localStorage.removeItem('STEP_3');
+    localStorage.removeItem('STEP_4');
+  }
 }
