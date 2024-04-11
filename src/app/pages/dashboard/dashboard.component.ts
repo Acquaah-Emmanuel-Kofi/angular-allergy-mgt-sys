@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { allergyFacts } from '../../../assets/data/DummyData';
 import { RecenthistorycardComponent } from '../../components/recenthistorycard/recenthistorycard.component';
 import { AllergyFact } from '../../interfaces/allergies.interface';
+import { AuthenticationService } from '../../services/auth/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +13,10 @@ import { AllergyFact } from '../../interfaces/allergies.interface';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private _router: Router, private _authService: AuthenticationService) {}
 
-  // Retrieve username to greet on dashboard from local storage
-  username = localStorage.getItem('USERNAME');
+  // Retrieve username from token
+  username = this._authService.getUserDeatils()?.username;
 
   randomFact_1 = this.getFact();
   randomFact_2 = this.getFact();
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
   allergyFacts: AllergyFact[] = allergyFacts;
 
   recordAllergy(): void {
-    this.router.navigate(['/record-allergy']);
+    this._router.navigate(['/record-allergy']);
   }
 
   // Method to return a greeting to the user depending on the current time.
