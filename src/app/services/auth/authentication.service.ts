@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { decodeJwt } from '../../utility/jwt-utility';
+import { decodeJwt } from '../../utility/decode-jwt.utility';
 import {
   DecodedToken,
   PayloadData,
