@@ -1,39 +1,76 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { LoginResponse } from '../../interfaces/auth.interface';
+import { decodeJwt } from '../../utility/jwt-utility';
+import {
+  DecodedToken,
+  PayloadData,
+} from '../../interfaces/decodeJwt.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   registerUser(formData: Object): Observable<any> {
-    return this.sendRequest('/auth/register', formData);
-  }
-
-  loginUser(formData: Object): Observable<any> {
-    return this.sendRequest('/auth/login', formData);
-  }
-
-  sendRequest(endpoint: string, formData: Object): Observable<any> {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json')
-      .set('Access-Control-Allow-Headers', 'Content-Type');
-
     return this._http.post<object>(
-      `${environment.BASE_URL}${endpoint}`,
-      formData,
-      { headers }
+      `${environment.BACKEND_API_BASE_URL}/auth/register`,
+      formData
     );
   }
 
-  saveUsefulDetails(data: LoginResponse){
-    localStorage.setItem('USER_ID', data.id);
-    localStorage.setItem('USERNAME', data.username);
-    localStorage.setItem('TOKEN', data.token);
+  loginUser(formData: Object): Observable<any> {
+    return this._http.post<object>(
+      `${environment.BACKEND_API_BASE_URL}/auth/login`,
+      formData
+    );
+  }
+
+  updateUserDetails(userId: string, formData: Object): Observable<any> {
+    return this._http.put<object>(
+      `${environment.BACKEND_API_BASE_URL}/user/update-user-details/${userId}`,
+      formData
+    );
+  }
+
+  saveToken(token: string) {
+    localStorage.setItem('TOKEN', token);
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('TOKEN');
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.getAccessToken();
+    return token ? true : false;
+  }
+
+  logoutUser(): void {
+    localStorage.removeItem('TOKEN');
+    this._router.navigate(['/login']);
+  }
+
+  getUserDeatils(): PayloadData | null {
+    let accessToken = this.getAccessToken();
+
+    if (accessToken) {
+      // Decode the JWT token
+      const decodedToken: DecodedToken | null = decodeJwt(accessToken);
+
+      // Access the data from the payload
+      if (decodedToken && decodedToken.payload) {
+        const payloadData = decodedToken.payload;
+        const userId = payloadData.userId;
+        const username = payloadData.sub;
+
+        return { userId, username };
+      }
+    }
+
+    return null;
   }
 }
