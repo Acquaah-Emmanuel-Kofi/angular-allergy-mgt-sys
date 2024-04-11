@@ -36,22 +36,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Retrieve stored credentials and set them in the form
-    const storedCredentials = this._rememberMeService.getStoredCredentials();
-    if (storedCredentials) {
-      this.form.patchValue(storedCredentials);
-    }
-
-    // Check if the 'rememberMe' control exists before subscribing to changes
-    const rememberMeControl = this.form.controls['rememberMe'];
-
-    if (rememberMeControl) {
-      rememberMeControl.valueChanges.subscribe((value) => {
-        if (value !== null) {
-          this._rememberMeService.setRememberMe(value);
-        }
-      });
-    }
+    this.retrieveStoredCredentials();
   }
 
   formIsValid = signal(true);
@@ -82,6 +67,37 @@ export class LoginComponent implements OnInit {
     return this.form.controls['rememberMe'];
   }
 
+  login() {
+    this.checkFormValidity();
+
+    let formData = this.form.value;
+
+    if (this.username.value && this.password.value) {
+      this.isLoading.set(true);
+
+      this._authService.loginUser(formData).subscribe({
+        next: (response) => {
+          this.isLoading.set(false);
+
+          this.handleRememberMeChange(this.rememberMe.value);
+
+          if (response.status === 'success') {
+            this._authService.saveToken(response.token);
+            this.form.reset();
+            this._toast.showSuccess('Login Sucessful!');
+            this._router.navigate(['/dashboard']);
+          } else {
+            this._toast.showError('User does not exists!');
+          }
+        },
+        error: () => {
+          this.isLoading.set(false);
+          this._toast.showError('Something went wrong. Please, try again!');
+        },
+      });
+    }
+  }
+
   checkFormValidity() {
     if (!this.username.value || !this.password.value) {
       this.formIsValid.set(false);
@@ -102,35 +118,21 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login() {
-    this.checkFormValidity();
+  // Retrieve stored credentials and set them in the form
+  retrieveStoredCredentials() {
+    const storedCredentials = this._rememberMeService.getStoredCredentials();
+    if (storedCredentials) {
+      this.form.patchValue(storedCredentials);
+    }
 
-    let formData = this.form.value;    
+    // Check if the 'rememberMe' control exists before subscribing to changes
+    const rememberMeControl = this.form.controls['rememberMe'];
 
-    if (this.username.value && this.password.value) {
-      this.isLoading.set(true);
-
-      this._authService.loginUser(formData).subscribe({
-        next: (response) => {
-          this.isLoading.set(false);
-
-          this.handleRememberMeChange(this.rememberMe.value); 
-
-          if (response.status === 'success') {
-            this.form.reset();
-            this._toast.showSuccess('Login Sucessful!');
-            this._authService.saveUsefulDetails(response);
-            this._router.navigate(['/dashboard']);
-          } else {
-            this._toast.showError('User does not exists!');
-          }
-        },
-        error: () => {
-          this.isLoading.set(false);
-          this._toast.showError(
-            'Something went wrong. Please, try again!'
-          );
-        },
+    if (rememberMeControl) {
+      rememberMeControl.valueChanges.subscribe((value) => {
+        if (value !== null) {
+          this._rememberMeService.setRememberMe(value);
+        }
       });
     }
   }
