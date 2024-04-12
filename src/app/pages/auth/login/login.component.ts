@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { checkUsernameValidator } from '../../../utility/validators/auth/username.validator';
-import { ToasterService } from '../../../components/toaster/toaster.service';
+import { ToasterService } from '../../../components/toaster/services/toaster.service';
 import { AuthenticationService } from '../../../services/auth/authentication.service';
 import { RememberMeService } from '../../../services/auth/remember-me.service';
 
@@ -86,13 +86,17 @@ export class LoginComponent implements OnInit {
             this.form.reset();
             this._toast.showSuccess('Login Sucessful!');
             this._router.navigate(['/dashboard']);
-          } else {
+          } else if (response.status === 'error') {
             this._toast.showError('User does not exists!');
+          } else {
+            this._toast.showError("Incorrect username or password.");
           }
         },
         error: () => {
           this.isLoading.set(false);
-          this._toast.showError('Something went wrong. Please, try again!');
+          this._toast.showError(
+            'Something went wrong. Please, check your internet connection and try again!'
+          );
         },
       });
     }

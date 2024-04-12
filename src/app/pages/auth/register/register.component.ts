@@ -12,7 +12,7 @@ import { checkUsernameValidator } from '../../../utility/validators/auth/usernam
 import { confirmPasswordValidator } from '../../../utility/validators/auth/confirm-password.validator';
 import { AlertComponent } from '../../../components/alert/alert.component';
 import { AuthenticationService } from '../../../services/auth/authentication.service';
-import { ToasterService } from '../../../components/toaster/toaster.service';
+import { ToasterService } from '../../../components/toaster/services/toaster.service';
 
 @Component({
   selector: 'app-register',
@@ -81,13 +81,14 @@ export class RegisterComponent {
     return this.form.controls['confirmPassword'];
   }
 
-  register() {
-    this.checkFormValidity();
-    this.checkTermsAndConditions();
+  get agreedTermsAndConditions() {
+    return this.form.controls['agreedTermsAndConditions'];
+  }
 
+  register() {
     let formData = this.form.value;
 
-    if (this.form.valid) {
+    if (this.checkFormValidity()) {
       this.isLoading.set(true);
 
       this._authService.registerUser(formData).subscribe({
@@ -96,24 +97,24 @@ export class RegisterComponent {
 
           if (response.status === 'success') {
             this.form.reset();
-            this._toast.showSuccess('Registered Successfully!');
+            this._toast.showSuccess('Account registered successfully!');
             this._router.navigate(['/login']);
           } else {
-            this._toast.showError('User already exists!');
+            this._toast.showError('Username already exists!');
           }
         },
         error: () => {
           this.isLoading.set(false);
           this._toast.showError(
-            'Something went wrong. Please, try again!'
+            'Something went wrong! Please, check your internet and try again.'
           );
         },
       });
     }
   }
 
-  checkFormValidity() {
-    if (!this.form.valid) {
+  checkFormValidity(): Boolean {
+    if (this.password.errors && this.username.errors) {
       this.formIsValid.set(false);
 
       setTimeout(() => {
@@ -121,11 +122,11 @@ export class RegisterComponent {
       }, 3000);
 
       this.errorMessage.set('Invalid form! All fields are required.');
-    }
-  }
 
-  checkTermsAndConditions() {
-    if (this.form.controls['agreedTermsAndConditions'].errors) {
+      return false;
+    }
+
+    if (this.agreedTermsAndConditions.errors) {
       this.formIsValid.set(false);
 
       setTimeout(() => {
@@ -133,7 +134,9 @@ export class RegisterComponent {
       }, 3000);
 
       this.errorMessage.set('You must agree to the terms and conditions');
-      return;
+      return false;
     }
+
+    return true;
   }
 }
