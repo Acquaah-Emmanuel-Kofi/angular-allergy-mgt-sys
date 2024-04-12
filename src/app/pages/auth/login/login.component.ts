@@ -68,11 +68,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.checkFormValidity();
 
     let formData = this.form.value;
 
-    if (this.username.value && this.password.value) {
+    if (this.checkFormValidity()) {
       this.isLoading.set(true);
 
       this._authService.loginUser(formData).subscribe({
@@ -102,7 +101,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  checkFormValidity() {
+  checkFormValidity(): Boolean {
     if (!this.username.value || !this.password.value) {
       this.formIsValid.set(false);
 
@@ -111,7 +110,11 @@ export class LoginComponent implements OnInit {
       }, 3000);
 
       this.errorMessage.set('Invalid credentials!');
+
+      return false;
     }
+
+    return true;
   }
 
   handleRememberMeChange(rememberMeValue: any): void {
