@@ -9,7 +9,7 @@ import { Component, Input, OnInit, signal } from '@angular/core';
 })
 export class AlertComponent implements OnInit {
 
-  @Input('message')
+  @Input()
   message: string = '';
 
   hasError = signal(false);
