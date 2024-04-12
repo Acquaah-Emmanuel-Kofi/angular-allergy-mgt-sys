@@ -8,6 +8,7 @@ import {
   DecodedToken,
   PayloadData,
 } from '../../interfaces/decodeJwt.interface';
+import { NAME_KEY } from '../../utility/constants/auth.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,9 @@ export class AuthenticationService {
     );
   }
 
-  updateUserDetails(userId: string, formData: Object): Observable<any> {
+  updateUserDetails(formData: Object): Observable<any> {
+    const userId = this.getUserDeatils()?.userId;
+
     return this._http.put<object>(
       `${environment.BACKEND_API_BASE_URL}/user/update-user-details/${userId}`,
       formData
@@ -37,11 +40,11 @@ export class AuthenticationService {
   }
 
   saveToken(token: string) {
-    localStorage.setItem('TOKEN', token);
+    localStorage.setItem(NAME_KEY, token);
   }
 
   getAccessToken() {
-    return localStorage.getItem('TOKEN');
+    return localStorage.getItem(NAME_KEY);
   }
 
   isLoggedIn(): boolean {
@@ -50,7 +53,7 @@ export class AuthenticationService {
   }
 
   logoutUser(): void {
-    localStorage.removeItem('TOKEN');
+    localStorage.removeItem(NAME_KEY);
     this._router.navigate(['/login']);
   }
 
