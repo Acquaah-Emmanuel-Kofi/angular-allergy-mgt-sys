@@ -3,7 +3,6 @@ import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { decodeJwt } from '../../utility/decode-jwt.utility';
 import {
   DecodedToken,
   PayloadData,
@@ -12,6 +11,7 @@ import {
   ACCESS_TOKEN_KEY,
   USERID_KEY,
   USERNAME_KEY,
+  decodeJwt,
   decryptData,
   encryptData,
 } from '../../utility/constants/auth.constants';
