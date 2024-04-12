@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -8,13 +8,21 @@ import {
   DecodedToken,
   PayloadData,
 } from '../../interfaces/decodeJwt.interface';
-import { NAME_KEY } from '../../utility/constants/auth.constants';
+import {
+  ACCESS_TOKEN_KEY,
+  USERID_KEY,
+  USERNAME_KEY,
+  decryptData,
+  encryptData,
+} from '../../utility/constants/auth.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   constructor(private _http: HttpClient, private _router: Router) {}
+
+  private userId = signal(this.getUserDeatils()?.userId);
 
   registerUser(formData: Object): Observable<any> {
     return this._http.post<object>(
@@ -31,20 +39,33 @@ export class AuthenticationService {
   }
 
   updateUserDetails(formData: Object): Observable<any> {
-    const userId = this.getUserDeatils()?.userId;
-
     return this._http.put<object>(
-      `${environment.BACKEND_API_BASE_URL}/user/update-user-details/${userId}`,
+      `${environment.BACKEND_API_BASE_URL}/user/update-user-details/${this.userId()}`,
       formData
     );
   }
 
-  saveToken(token: string) {
-    localStorage.setItem(NAME_KEY, token);
+  getUserProfileDetails(): Observable<any> {
+    return this._http.get<object>(
+      `${environment.BACKEND_API_BASE_URL}/user/${this.userId()}`
+    );
   }
 
-  getAccessToken() {
-    return localStorage.getItem(NAME_KEY);
+  saveToken(token: string) {
+    const encryptedToken = encryptData(token);
+    localStorage.setItem(ACCESS_TOKEN_KEY, encryptedToken);
+    this.saveUserDeatils(encryptedToken);
+  }
+
+  getAccessToken(): String | null {
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+    if (token) {
+      const decryptedToken = decryptData(token);
+      return decryptedToken;
+    }
+
+    return null;
   }
 
   isLoggedIn(): boolean {
@@ -53,27 +74,43 @@ export class AuthenticationService {
   }
 
   logoutUser(): void {
-    localStorage.removeItem(NAME_KEY);
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(USERID_KEY);
+    localStorage.removeItem(USERNAME_KEY);
     this._router.navigate(['/login']);
   }
 
-  getUserDeatils(): PayloadData | null {
-    let accessToken = this.getAccessToken();
+  getUserDeatils() {
+    const userIdFromLocalStorage = localStorage.getItem(USERID_KEY);
+    const usernameFromLocalStorage = localStorage.getItem(USERNAME_KEY);
 
-    if (accessToken) {
+    if (userIdFromLocalStorage !== null && usernameFromLocalStorage !== null) {
+      const userId = decryptData(userIdFromLocalStorage);
+      const username = decryptData(usernameFromLocalStorage);
+
+      return { userId, username };
+    }
+
+    return null;
+  }
+
+  saveUserDeatils(accessToken: string): void {
+    const decryptedAccessToken = decryptData(accessToken);
+
+    if (decryptedAccessToken) {
       // Decode the JWT token
-      const decodedToken: DecodedToken | null = decodeJwt(accessToken);
+      const decodedToken: DecodedToken | null = decodeJwt(decryptedAccessToken);
 
       // Access the data from the payload
       if (decodedToken && decodedToken.payload) {
         const payloadData = decodedToken.payload;
-        const userId = payloadData.userId;
-        const username = payloadData.sub;
 
-        return { userId, username };
+        const encryptedUserId = encryptData(payloadData.jti);
+        const encryptedUsername = encryptData(payloadData.sub);
+
+        localStorage.setItem(USERID_KEY, encryptedUserId);
+        localStorage.setItem(USERNAME_KEY, encryptedUsername);
       }
     }
-
-    return null;
   }
 }
