@@ -18,10 +18,10 @@ export class LayoutComponent {
   constructor(public _themeService: ThemeService, private _authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    // Change the icons inside the button based on previous settings
     const colorTheme = localStorage.getItem('color-theme');
-    if (colorTheme === 'dark' || (!colorTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      this._themeService.darkTheme = true;
+    if(colorTheme === 'dark' || (!colorTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.toggle('dark', true);
+      this.toggleTheme();
     }
   }
 
