@@ -1,104 +1,107 @@
-<form [formGroup]="formStepper1" (ngSubmit)="nextStep()">
-    <div
-      class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
-    >
-      <h3 class="mb-4 font-bold dark:text-white">Medical History:</h3>
-      <div class="formgroup mb-4">
-        <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Have you ever experienced allergic reactions in the past? If yes,
-          please describe.</label
-        >
-        <textarea
-          id="allergicReactionsExperienced"
-          rows="4"
-          formControlName="allergicReactionsExperienced"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-          placeholder="Write your thoughts here..."
-        ></textarea>
-      </div>
-      <div class="formgroup mb-4">
+<div>
+  <div
+    class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-4 font-bold dark:text-white">Medical History:</h3>
+
+    <div class="formgroup mb-4">
+      <label
+        for="hasExistingMedicalCondition"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Do you have any existing medical condition?</label
+      >
+      <div
+        class="flex flex-col py-2 mb-2 p-4 border border-gray-200 rounded dark:border-gray-700"
+      >
+        <div>
+          <input
+          id="hasExistingMedicalCondition"
+          type="radio"
+          value="I have a medical condition"
+          name="hasExistingMedicalCondition"
+          (change)="onChangeYes()"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
         <label
           for="hasExistingMedicalCondition"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Do you have any existing medical condition?</label
+          class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Yes, I have a medical condition.</label
         >
-        <div
-          class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
-        >
-          <input
-            id="hasExistingMedicalCondition"
-            type="radio"
-            value="I have a medical condition"
-            name="hasExistingMedicalCondition"
-            formControlName="hasExistingMedicalCondition"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="hasExistingMedicalCondition"
-            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Yes, I have a medical condition.</label
-          >
         </div>
-        <div
-          class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700"
-        >
-          <input
-            id="hasExistingMedicalCondition"
-            type="radio"
-            value="I don't have a medical condition"
-            name="hasExistingMedicalCondition"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="hasExistingMedicalCondition"
-            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >No, I don't have any.</label
-          >
-        </div>
+        @if (isChecked) {
+          <textarea
+          id="hasExistingMedicalCondition"
+          rows="4"
+          name="hasExistingMedicalCondition"
+          [(ngModel)]="form.medicalCondition"
+          class="block mt-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+          placeholder="Please, specify your conditions..."
+        ></textarea>
+        }
       </div>
-      <div class="formgroup">
+      <div
+        class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700"
+      >
+        <input
+          id="hasExistingMedicalCondition"
+          type="radio"
+          value="I don't have a medical condition"
+          name="hasExistingMedicalCondition"
+          (change)="onChangeNo()"
+          [(ngModel)]="form.medicalCondition"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
         <label
-          for="message"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Are you taking any medication?</label
+          for="hasExistingMedicalCondition"
+          class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >No, I don't have any.</label
         >
-        <div class="flex items-center mb-4">
-          <input
-            id="takingMedication"
-            type="radio"
-            value="yes"
-            name="takingMedication"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="takingMedication"
-            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Yes</label
-          >
-        </div>
-        <div class="flex items-center">
-          <input
-            id="takingMedication"
-            type="radio"
-            value="no"
-            name="takingMedication"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="takingMedication"
-            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >No</label
-          >
-        </div>
       </div>
     </div>
+    <div class="formgroup">
+      <label
+        for="message"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Are you taking any medication?</label
+      >
+      <div class="flex items-center mb-4">
+        <input
+          id="takingMedication"
+          type="radio"
+          value="On medication"
+          name="takingMedication"
+          [(ngModel)]="form.onMedication"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="takingMedication"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Yes</label
+        >
+      </div>
+      <div class="flex items-center">
+        <input
+          id="takingMedication"
+          type="radio"
+          value="not on medication"
+          name="takingMedication"
+          [(ngModel)]="form.onMedication"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="takingMedication"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >No</label
+        >
+      </div>
+    </div>
+  </div>
 
-    <button
-      type="submit"
-      class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
-    >
-      Next
-    </button>
-</form>
+  <button
+    type="button"
+    (click)="nextStep()"
+    class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
+  >
+    Next
+  </button>
+</div>
