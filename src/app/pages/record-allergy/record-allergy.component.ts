@@ -6,7 +6,6 @@ import { FormStep1Component } from './form-step1/form-step1.component';
 import { FormStep2Component } from './form-step2/form-step2.component';
 import { FormStep4Component } from './form-step4/form-step4.component';
 import { FormStep3Component } from './form-step3/form-step3.component';
-import { ModalService } from '../../components/modal/services/modal.service';
 import { FormData } from '../../interfaces/allergies.interface';
 import { AllergiesService } from '../../services/data/allergies.service';
 
