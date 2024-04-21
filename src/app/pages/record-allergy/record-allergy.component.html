@@ -31,15 +31,15 @@
         [style]="'width: ' + progress + '%'"
       ></div>
     </div>
-    <form class="stepper" (ngSubmit)="submitForm()">
+    <form class="stepper">
       @switch (currentStep) { @case (1) {
-      <app-form-step1 (nextStepForm)="nextStep($event)"></app-form-step1>
+      <app-form-step1 [form]="formData" (nextStepForm)="nextStep()"></app-form-step1>
       } @case (2) {
-      <app-form-step2 (prevStepForm)="prevStep()" (nextStepForm)="nextStep($event)"></app-form-step2>
+      <app-form-step2 [form]="formData" [handleCheckboxChange]="handleSymptomsChange" (prevStepForm)="prevStep()" (nextStepForm)="nextStep()"></app-form-step2>
       } @case (3) {
-      <app-form-step3 (prevStepForm)="prevStep()" (nextStepForm)="nextStep($event)"></app-form-step3>
+      <app-form-step3 [form]="formData" [handleCheckboxChange]="handleSymptomsOccuredChange" (prevStepForm)="prevStep()" (nextStepForm)="nextStep()"></app-form-step3>
       } @case (4) {
-      <app-form-step4 (prevStepForm)="prevStep()" (nextStepForm)="nextStep($event)"></app-form-step4>
+      <app-form-step4 [form]="formData" (prevStepForm)="prevStep()" (submitForm)="submitForm()"></app-form-step4>
       } }
     </form>
   </div>

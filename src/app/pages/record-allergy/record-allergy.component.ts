@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToasterService } from '../../components/toaster/toaster.service';
+import { ToasterService } from '../../components/toaster/services/toaster.service';
 import { FormStep1Component } from './form-step1/form-step1.component';
 import { FormStep2Component } from './form-step2/form-step2.component';
 import { FormStep4Component } from './form-step4/form-step4.component';
 import { FormStep3Component } from './form-step3/form-step3.component';
+import { ModalService } from '../../components/modal/services/modal.service';
+import { FormData } from '../../interfaces/allergies.interface';
+import { AllergiesService } from '../../services/data/allergies.service';
 
 @Component({
   selector: 'app-record-allergy',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     FormsModule,
     FormStep1Component,
     FormStep2Component,
@@ -34,31 +30,38 @@ export class RecordAllergyComponent {
 
   constructor(
     private _router: Router,
-    private _toast: ToasterService
+    private _toast: ToasterService,
+    private _allergyService: AllergiesService
   ) {}
 
-  formData: any = {};
+  experiencedSymptomsList: string = '';
+  whenSypmtomsOccured: string = '';
+
+  formData: FormData = {
+    medicalCondition: '',
+    medicalConditionExplained: '',
+    onMedication: '',
+    allergySymptoms: '',
+    symptomSeverity: '',
+    causeOfSymptom: '',
+    timesOfReaction: '',
+    allergyExposedTo: '',
+    doesTheUserSmoke: '',
+    additionalNotes: '',
+  };
 
   goBack(): void {
-    this._router.navigate(['/dashboard']);
+    this._router.navigateByUrl('/dashboard');
   }
 
-  nextStep(formStepperData: FormGroup): void {
+  nextStep(): void {
     if (this.currentStep < 4) {
       this.progress += this.progressCount;
       this.currentStep++;
-
-      this.formData = { ...this.formData, ...formStepperData };
-    }
-
-    if (this.currentStep === 4) {
-      console.log("Last Form");
-      
-      console.log(this.formData);
     }
   }
 
-  prevStep(): void {    
+  prevStep(): void {
     if (this.currentStep > 1) {
       this.progress -= this.progressCount;
       this.currentStep--;
@@ -66,17 +69,56 @@ export class RecordAllergyComponent {
   }
 
   submitForm(): void {
-    console.log('Clicked to submit');
-    console.log(this.formData);
-    this.removeFormDraft();
-
-    // this._toast.showSuccess('Success!');
+    this._allergyService.sendAllergyData(this.formData).subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          this._toast.showSuccess('Success!');
+          this._router.navigateByUrl('/history');
+        }
+      },
+      error: (err) => {
+        this._toast.showSuccess(err.message);
+      },
+    });
   }
 
-  removeFormDraft(): void {
-    localStorage.removeItem('STEP_1');
-    localStorage.removeItem('STEP_2');
-    localStorage.removeItem('STEP_3');
-    localStorage.removeItem('STEP_4');
+  // Function to handle checkbox change event
+  handleSymptomsChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const selectedValue = target.value;
+    const isChecked = target.checked;
+
+    let data = '';
+
+    if (isChecked) {
+      // Append the selected value to the string
+      data += selectedValue + ', ';
+    } else if (!isChecked && selectedValue) {
+      // Replace the selected value with an empty string
+      data = data.replace(selectedValue + ', ', '');
+    }
+
+    console.log(data);
+
+    return data;
+  }
+
+  handleSymptomsOccuredChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const selectedValue = target.value;
+    const isChecked = target.checked;
+
+    if (isChecked) {
+      // Append the selected value to the string
+      this.experiencedSymptomsList += selectedValue + ', ';
+    } else if (!isChecked && selectedValue) {
+      // Replace the selected value with an empty string
+      this.experiencedSymptomsList = this.experiencedSymptomsList.replace(
+        selectedValue + ', ',
+        ''
+      );
+    }
+
+    console.log(this.experiencedSymptomsList);
   }
 }
