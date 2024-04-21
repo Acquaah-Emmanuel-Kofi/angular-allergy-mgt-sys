@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import {
   DecodedToken,
-  PayloadData,
 } from '../../interfaces/decodeJwt.interface';
 import {
   ACCESS_TOKEN_KEY,
@@ -77,7 +76,7 @@ export class AuthenticationService {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USERID_KEY);
     localStorage.removeItem(USERNAME_KEY);
-    this._router.navigate(['/login']);
+    this._router.navigateByUrl('/login');
   }
 
   getUserDeatils() {
@@ -102,7 +101,7 @@ export class AuthenticationService {
       const decodedToken: DecodedToken | null = decodeJwt(decryptedAccessToken);
 
       // Access the data from the payload
-      if (decodedToken && decodedToken.payload) {
+      if (decodedToken) {
         const payloadData = decodedToken.payload;
 
         const encryptedUserId = encryptData(payloadData.jti);
