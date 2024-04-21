@@ -1,114 +1,136 @@
-<form class="step" [formGroup]="formStepper4" (ngSubmit)="nextStep()">
-    <div
-      class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
-    >
-      <h3 class="mb-4 font-bold dark:text-white">
-        Life Style and Environmental Factors:
-      </h3>
-      <div class="formgroup mb-4">
+<div class="step">
+  <div
+    class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+  >
+    <h3 class="mb-4 font-bold dark:text-white">
+      Life Style and Environmental Factors:
+    </h3>
+    <div class="formgroup mb-4">
+      <label
+        for="allergyExposedTo"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Are you exposed to any occupational or environmental allergens?</label
+      >
+      <div class="flex items-center mb-4">
+        <input
+          id="allergyExposedTo"
+          type="radio"
+          value="exposed to"
+          name="allergyExposedTo"
+          [(ngModel)]="form.allergyExposedTo"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
         <label
-          for="occupationalOrEnvironmentalAllergens"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Are you exposed to any occupational or environmental allergens?
-          If yes, please describe.</label
+          for="allergyExposedTo"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Yes</label
         >
-        <textarea
-          id="occupationalOrEnvironmentalAllergens"
-          rows="2"
-          formControlName="occupationalOrEnvironmentalAllergens"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Write your thoughts here..."
-        ></textarea>
       </div>
-      <div class="formgroup mb-4">
+      <div class="flex items-center">
+        <input
+          id="allergyExposedTo"
+          type="radio"
+          value="not exposed to"
+          name="allergyExposedTo"
+          [(ngModel)]="form.allergyExposedTo"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
         <label
-          for="exposedToSmoke"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Do you smoke or are you exposed to second hand smoke?</label
+          for="allergyExposedTo"
+          class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >No</label
         >
-        <div
-          class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
-        >
-          <input
-            id="exposedToSmoke"
-            type="radio"
-            value="I somke"
-            name="exposedToSmoke"
-            formControlName="exposedToSmoke"
-            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="exposedToSmoke"
-            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >Yes, I somke.</label
-          >
-        </div>
-        <div
-          class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
-        >
-          <input
-            id="exposedToSmoke"
-            type="radio"
-            value="I don't smoke"
-            name="exposedToSmoke"
-            formControlName="exposedToSmoke"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="exposedToSmoke"
-            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >No, I don't smoke</label
-          >
-        </div>
-        <div
-          class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
-        >
-          <input
-            id="exposedToSmoke"
-            type="radio"
-            value="I'm exposed to second hand smoke"
-            name="exposedToSmoke"
-            formControlName="exposedToSmoke"
-            class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-          />
-          <label
-            for="exposedToSmoke"
-            class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >No, but I'm exposed to second hand smoke</label
-          >
-        </div>
-      </div>
-      <div class="formgroup">
-        <h3 class="mb-4 font-bold dark:text-white">
-          Additional Information:
-        </h3>
-        <label
-          for="additionalInformation"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >If there is any other information you beleive is important for us
-          to know about your allergy or health history?</label
-        >
-        <textarea
-          id="additionalInformation"
-          rows="2"
-          formControlName="additionalInformation"
-          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
-          placeholder="Write your thoughts here..."
-        ></textarea>
       </div>
     </div>
+    <div class="formgroup mb-4">
+      <label
+        for="doesTheUserSmoke"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Do you smoke or are you exposed to second hand smoke?</label
+      >
+      <div
+        class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
+      >
+        <input
+          id="doesTheUserSmoke"
+          type="radio"
+          value="smoke"
+          name="doesTheUserSmoke"
+          [(ngModel)]="form.doesTheUserSmoke"
+          class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="doesTheUserSmoke"
+          class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >Yes, I smoke.</label
+        >
+      </div>
+      <div
+        class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
+      >
+        <input
+          id="doesTheUserSmoke"
+          type="radio"
+          value="do not smoke"
+          name="doesTheUserSmoke"
+          [(ngModel)]="form.doesTheUserSmoke"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="doesTheUserSmoke"
+          class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >No, I don't smoke</label
+        >
+      </div>
+      <div
+        class="flex items-center mb-2 ps-4 border border-gray-200 rounded dark:border-gray-700"
+      >
+        <input
+          id="doesTheUserSmoke"
+          type="radio"
+          value="do not smoke, but exposed to second hand smoke"
+          name="doesTheUserSmoke"
+          [(ngModel)]="form.doesTheUserSmoke"
+          class="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <label
+          for="doesTheUserSmoke"
+          class="w-full py-2 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >No, but I'm exposed to second hand smoke</label
+        >
+      </div>
+    </div>
+    <div class="formgroup">
+      <h3 class="mb-4 font-bold dark:text-white">Additional Information:</h3>
+      <label
+        for="additionalInformation"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >If there is any other information you beleive it's important for us to
+        know about your allergy or health history?</label
+      >
+      <textarea
+        id="additionalInformation"
+        rows="2"
+        name="additionalInformation"
+        [(ngModel)]="form.additionalNotes"
+        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+        placeholder="Write your thoughts here..."
+      ></textarea>
+    </div>
+  </div>
 
-    <button
-      type="button"
-      (click)="prevStep()"
-      class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-    >
-      Previous
-    </button>
-    <button
-      type="submit"
-      class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
-    >
-      Submit
-    </button>
-  </form>
+  <button
+    type="button"
+    (click)="prevStep()"
+    class="px-8 py-2 me-2 mt-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-teal-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+  >
+    Previous
+  </button>
+  <button
+    type="button"
+    (click)="nextStep()"
+    class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-8 py-2 me-2 mt-2 dark:bg-teal-600 dark:hover:bg-teal-700 focus:outline-none dark:focus:ring-teal-800"
+  >
+    Submit
+  </button>
+</div>
