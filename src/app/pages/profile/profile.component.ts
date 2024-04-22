@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, signal } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -17,6 +17,8 @@ import { ToasterService } from '../../components/toaster/services/toaster.servic
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
+  imageUrl: string | ArrayBuffer | null = null;
+
   isLoading = signal(false);
 
   constructor(
@@ -46,6 +48,16 @@ export class ProfileComponent implements OnInit {
     return this.form.controls['email'];
   }
 
+
+  handleImageUpload(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageUrl = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   updateProfile() {
     if (this.checkFormValidity()) {
       this.isLoading.set(true);
@@ -65,7 +77,7 @@ export class ProfileComponent implements OnInit {
         error: () => {
           this.isLoading.set(false);
           this._toast.showError(
-            'Something went wrong. Please, check your internet connection and try again!'
+            'An error occurred. Please try again later.'
           );
         },
       });
