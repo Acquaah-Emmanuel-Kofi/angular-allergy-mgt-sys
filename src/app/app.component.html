@@ -1,7 +1,10 @@
 <ng-container>
+
     @if (!isAuthenticated()) {
         <app-layout></app-layout>
     }
+
+    <app-toaster></app-toaster>
+    
 </ng-container>
-<app-toaster></app-toaster>
 <router-outlet></router-outlet>
