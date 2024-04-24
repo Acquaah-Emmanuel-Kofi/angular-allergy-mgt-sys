@@ -16,8 +16,8 @@ export class AllergiesService {
   ) {}
 
   getRecordedAllergy(): Observable<any[]> {
-    return this._http.get<any[]>(
-      `${environment.BACKEND_API_BASE_URL}/allergy/history/${this.userId}`
+    return this._http.post<any[]>(
+      `${environment.BACKEND_API_BASE_URL}/allergy/history/`, this.userId
     );
   }
 

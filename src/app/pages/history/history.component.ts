@@ -1,19 +1,35 @@
-import { Component } from '@angular/core';
-import { LayoutComponent } from '../../components/layout/layout.component';
+import { Component, OnInit } from '@angular/core';
 import { HistorycardComponent } from '../../components/historycard/historycard.component';
-import { History } from '../../models/allergies.model';
 import { history } from '../../../assets/data/DummyData';
+import { AllergiesService } from '../../services/data/allergies.service';
+import { Observable } from 'rxjs';
+import { History } from '../../interfaces/allergies.interface';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [LayoutComponent, HistorycardComponent],
+  imports: [HistorycardComponent],
   templateUrl: './history.component.html',
-  styleUrl: './history.component.scss'
+  styleUrl: './history.component.scss',
 })
-export class HistoryComponent {
+export class HistoryComponent implements OnInit {
   appName = 'Aller Gus';
 
-  history: History[] = history;
+  history$!: Observable<History[]>;
 
+  history: History[] = [];
+
+  constructor(private _allergies: AllergiesService) {}
+
+  ngOnInit() {
+    this._allergies.getRecordedAllergy().subscribe({
+      next: (response: any) => {
+        this.history = response.data;
+        console.log("History data: ",response);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 }

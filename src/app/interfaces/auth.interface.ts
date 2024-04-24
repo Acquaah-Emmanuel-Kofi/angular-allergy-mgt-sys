@@ -1,7 +1,14 @@
-export interface LoginResponse {
-    id: string;
-    token: string;
-    status: string;
+export interface RegisterUser {
     username: string;
-    message: string;
+    password: string;
+}
+
+export interface LoginUser {
+    username: string;
+    password: string;
+}
+
+export interface User {
+    username: string;
+    password: string;
 }
