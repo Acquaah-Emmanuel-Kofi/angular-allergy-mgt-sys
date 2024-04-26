@@ -5,6 +5,7 @@ export interface AllergyFact {
 }
 
 export interface History {
+  date: string;
   id: number;
   favorite: boolean;
   message: string;

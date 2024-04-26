@@ -4,6 +4,7 @@ import { history } from '../../../assets/data/DummyData';
 import { AllergiesService } from '../../services/data/allergies.service';
 import { Observable } from 'rxjs';
 import { History } from '../../interfaces/allergies.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -15,11 +16,11 @@ import { History } from '../../interfaces/allergies.interface';
 export class HistoryComponent implements OnInit {
   appName = 'Aller Gus';
 
-  history$!: Observable<History[]>;
+  // history$!: Observable<History[]>;
 
   history: History[] = [];
 
-  constructor(private _allergies: AllergiesService) {}
+  constructor(private _allergies: AllergiesService, private router: Router) {}
 
   ngOnInit() {
     this._allergies.getRecordedAllergy().subscribe({
@@ -31,5 +32,14 @@ export class HistoryComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+
+  navigateToHistoryDetails() {
+    this.router.navigate(['history/details', this.history[0].id]);
+  }
+
+  public getHistoryDetails(id: number): History {
+    return this.history.find((history) => history.id === id)!;
   }
 }

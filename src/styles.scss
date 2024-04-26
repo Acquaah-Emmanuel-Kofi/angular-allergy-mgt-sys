@@ -8,3 +8,9 @@
 
 // Import Tailwind utility styles
 @import 'tailwindcss/utilities';
+
+.job-title,.wrap {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis when text is cut off */
+  }

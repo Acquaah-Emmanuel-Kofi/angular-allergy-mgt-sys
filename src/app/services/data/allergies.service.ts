@@ -1,14 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { AuthenticationService } from '../auth/authentication.service';
+// import { history } from '../../../assets/data/DummyData';
+import { History } from '../../interfaces/allergies.interface';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AllergiesService {
   userId: string | undefined = '';
+  historyData = history;
+
 
   constructor(
     private _http: HttpClient,
@@ -32,4 +37,20 @@ export class AllergiesService {
       formData
     );
   }
+
+ 
+
+  // updateHistoryData(newHistoryData: History[]) {
+  //   // this.historyDataSource.next(newHistoryData);
+  // }
+
+  // getRecentHistoryData(): History[] {
+  //   // return this.historyData.slice(0, 3);
+  // }
+
+  // filterHistoryData(searchTerm: string): History[] {
+  //   // return this.historyData.filter(history =>
+  //     history.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  // }
 }

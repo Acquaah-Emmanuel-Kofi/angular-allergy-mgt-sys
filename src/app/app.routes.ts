@@ -6,6 +6,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { HistorydetailsComponent } from './historydetails/historydetails.component';
 
 export const routes: Routes = [
     { path: '', component: LandingPageComponent }, // Default route
@@ -15,4 +16,6 @@ export const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'history/details/', component: HistorydetailsComponent },
+    {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
   ];
