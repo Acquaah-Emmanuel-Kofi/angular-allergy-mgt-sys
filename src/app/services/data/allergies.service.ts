@@ -8,22 +8,27 @@ import { AuthenticationService } from '../auth/authentication.service';
   providedIn: 'root',
 })
 export class AllergiesService {
-  userId = this._authService.getUserDeatils()?.userId;
+  userId: string | undefined = '';
 
   constructor(
     private _http: HttpClient,
     private _authService: AuthenticationService
-  ) {}
+  ) {
+    this.userId = this._authService.getUserDeatils()?.userId;
+  }
 
   getRecordedAllergy(): Observable<any[]> {
+    const userId = { userId: this.userId };
+
     return this._http.post<any[]>(
-      `${environment.BACKEND_API_BASE_URL}/allergy/history/`, this.userId
+      `${environment.NGROK_API_BASE_URL}/allergy/history/`,
+      userId
     );
   }
 
   sendAllergyData(formData: Object): Observable<any> {
     return this._http.post<object>(
-      `${environment.BACKEND_API_BASE_URL}/allergy/chat/${this.userId}`,
+      `${environment.NGROK_API_BASE_URL}/allergy/chat/${this.userId}`,
       formData
     );
   }
