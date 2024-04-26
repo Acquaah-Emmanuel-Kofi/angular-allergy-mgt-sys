@@ -6,9 +6,8 @@ export interface AllergyFact {
 
 export interface History {
   id: number;
-  title: string;
-  description: string;
-  date: string;
+  favorite: boolean;
+  message: string;
 }
 
 export interface FormData {
