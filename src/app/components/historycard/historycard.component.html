@@ -13,12 +13,12 @@
         <button type="button"
             class="py-1.5 px-8 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-teal-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-teal-700" (click)="navigateToHistoryDetails()"  >Open</button>
         <button type="button"
-            class="text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-8 py-1.5 text-center me-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800">Delete</button>
+            class="text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-8 py-1.5 text-center me-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800" (click)="onDelete.emit(historyData.id)">Delete</button>
     </div>
     <div class="flex items-center gap-4">
         <button 
-        [style]="{backgroundColor: historyData? 'teal' : 'white'}"
-        [disabled]="isdisabled"
+        (click)="starMsg(historyData.id)"
+         [style.backgroundColor]="historyData.favorite ? 'teal' : 'white '" 
         class="w-8 h-8 border rounded-full border-teal-800 flex justify-center items-center hover:bg-teal-400 transition-all dark:border-gray-200">
             <svg class="w-4 h-4 text-teal-800 dark:text-gray-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                 height="24" fill="none" viewBox="0 0 24 24">

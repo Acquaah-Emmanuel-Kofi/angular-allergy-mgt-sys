@@ -8,10 +8,13 @@
     
         <button
           type="button"
+          (click)="filterStarredHistory()"
+          [class.bg-teal-700]="showStarredOnly" [class.hover:bg-teal-800]="showStarredOnly" [class.text-white]="showStarredOnly"
           class="text-gray-900 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center dark:bg-gray-600 dark:text-white me-2 mb-2"
         >
           <svg
             class="w-4 h-4 me-2 -ms-1 text-[#03543F] dark:text-white"
+            [class.fill-white]="showStarredOnly"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -29,64 +32,12 @@
         </button>
       </div>
 
-      <form id="form" class="flex items-center mb-4">
-        <label for="simple-search" class="sr-only">Search</label>
-        <div class="relative w-full">
-          <div
-            class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-          >
-            <svg
-              class="w-6 h-6 text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="2"
-                d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"
-              />
-            </svg>
-          </div>
-          <input
-            type="text"
-            id="simple-search"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search allergy name..."
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="p-2.5 ms-2 text-sm font-medium text-white bg-teal-700 rounded-lg border border-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
-        >
-          <svg
-            class="w-4 h-4"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 20"
-          >
-            <path
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-            />
-          </svg>
-          <span class="sr-only">Search</span>
-        </button>
-      </form>
+
     </div>
 
-    <div class="flex flex-col gap-4 mb-4 8">
+    <div class="flex flex-col gap-4 mb-4 8 mt-[20px]">
       @for (history of history.reverse(); track $index) {
-      <app-historycard [id]="history.id" [historyData]="history" />
+      <app-historycard [id]="history.id" [historyData]="history" (onDelete)="deleteItem($event)" />
       }@empty {
       <div class="h-[200px] w-full flex justify-center items-center">
         <h1>No Allergy Recorded Yet.</h1>

@@ -47,21 +47,5 @@ export class AllergiesService {
     );
   }
 
-  // public getHistoryDetails(id: number): History {
-  //   return history[id];
-  // }
 
-  // updateHistoryData(newHistoryData: History[]) {
-  //   // this.historyDataSource.next(newHistoryData);
-  // }
-
-  // getRecentHistoryData(): History[] {
-  //   return this.historyData.slice(0, 3);
-  // }
-
-  // filterHistoryData(searchTerm: string): History[] {
-  //   // return this.historyData.filter(history =>
-  //     history.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  // }
 }

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HistorycardComponent } from '../../components/historycard/historycard.component';
-import { history } from '../../../assets/data/DummyData';
-import { AllergiesService } from '../../services/data/allergies.service';
-import { Observable } from 'rxjs';
 import { History } from '../../interfaces/allergies.interface';
-import { Router } from '@angular/router';
+import { AllergiesService } from '../../services/data/allergies.service';
+import { HistorycardComponent } from '../../components/historycard/historycard.component';
 
 @Component({
   selector: 'app-history',
@@ -15,20 +12,15 @@ import { Router } from '@angular/router';
 })
 export class HistoryComponent implements OnInit {
   appName = 'Aller Gus';
-
-  // history$!: Observable<History[]>;
-
   history: History[] = [];
+  showStarredOnly = false;
 
-  constructor(private _allergies: AllergiesService, private router: Router) {}
+  constructor(private _allergies: AllergiesService) {}
 
   ngOnInit() {
     this._allergies.getRecordedAllergy().subscribe({
       next: (response: any) => {
         this.history = response.data;
-        
-        // console.log(this.history);
-        
       },
       error: (err) => {
         console.log(err);
@@ -36,6 +28,25 @@ export class HistoryComponent implements OnInit {
     });
   }
 
+  filterStarredHistory() {
+    this.showStarredOnly = !this.showStarredOnly;
+    if (this.showStarredOnly) {
+      this.history = this.history.filter((item) => item.favorite === true);
+    } else {
+      this._allergies.getRecordedAllergy().subscribe({
+        next: (response: any) => {
+          this.history = response.data;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  deleteItem(id: number) {
+    this.history = this.history.filter((item) => item.id !== id);
+  }
 
   
 }

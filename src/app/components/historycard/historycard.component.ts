@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { History } from '../../interfaces/allergies.interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,27 +13,22 @@ import { Router } from '@angular/router';
 export class HistorycardComponent {
   @Input()
   historyData!: History;
-  isdisabled: boolean = false;
+  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private router: Router) {}
 
   starMsg(id:number) {
-    if (this.historyData.favorite) {
-      this.historyData.favorite = true;
-      this.isdisabled = true;
-
-
-    } else {
-      this.historyData.favorite = true;
-    }
+   this.historyData.favorite = !this.historyData.favorite;
    
     
   }
 
   navigateToHistoryDetails() {
     this.router.navigate(['history/details', this.historyData.id]);
-    // console.log(this.historyData);
-    
+  }
+
+  deleteItem() {
+    this.onDelete.emit(this.historyData.id);
   }
 
   
