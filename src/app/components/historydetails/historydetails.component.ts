@@ -1,28 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AllergiesService } from '../../services/data/allergies.service';
 import { ActivatedRoute } from '@angular/router';
 import { History } from '../../interfaces/allergies.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-historydetails',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './historydetails.component.html',
-  styleUrl: './historydetails.component.scss'
+  styleUrls: ['./historydetails.component.scss'],
+  providers: [AllergiesService],
 })
-export class HistorydetailsComponent {
-  @Input()
-  historyData!: History;
-  // HisStory?: History;
+export class HistorydetailsComponent implements OnInit {
+  historyData: History[] = [];
+  history: History | null = null; 
+  itemId?: string;
+  itemData?: History;
 
-  constructor(private allergyService: AllergiesService, private route: ActivatedRoute){
-    
-  }
+  constructor(private _allergies: AllergiesService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // this.route.paramMap.subscribe(params => {
-    //   this.HisStory =this.allergyService.getHistoryDetails(Number(params.get('id'))) ;
-    // })
- 
+  
+    this.route.params.subscribe(params => {
+      this.itemId = params['id'];
+      this.getData();
+    });
+  }
+
+  getData() {
+    this._allergies.getALlergyDetails(this.itemId).subscribe(data => {
+      this.itemData = data;
+    });
   }
 }

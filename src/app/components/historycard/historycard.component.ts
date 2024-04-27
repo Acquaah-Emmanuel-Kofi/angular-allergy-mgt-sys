@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { History } from '../../interfaces/allergies.interface';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historycard',
@@ -14,6 +15,8 @@ export class HistorycardComponent {
   historyData!: History;
   isdisabled: boolean = false;
 
+  constructor(private router: Router) {}
+
   starMsg(id:number) {
     if (this.historyData.favorite) {
       this.historyData.favorite = true;
@@ -26,4 +29,12 @@ export class HistorycardComponent {
    
     
   }
+
+  navigateToHistoryDetails() {
+    this.router.navigate(['history/details', this.historyData.id]);
+    // console.log(this.historyData);
+    
+  }
+
+  
 }

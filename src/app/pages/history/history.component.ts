@@ -26,7 +26,8 @@ export class HistoryComponent implements OnInit {
     this._allergies.getRecordedAllergy().subscribe({
       next: (response: any) => {
         this.history = response.data;
-        console.log("History data: ",response);
+        // console.log(this.history);
+        
       },
       error: (err) => {
         console.log(err);
@@ -35,11 +36,5 @@ export class HistoryComponent implements OnInit {
   }
 
 
-  navigateToHistoryDetails() {
-    this.router.navigate(['history/details', this.history[0].id]);
-  }
-
-  public getHistoryDetails(id: number): History {
-    return this.history.find((history) => history.id === id)!;
-  }
+  
 }
