@@ -14,3 +14,22 @@
     overflow: hidden; /* Hide any overflowing text */
     text-overflow: ellipsis; /* Show ellipsis when text is cut off */
   }
+
+
+ h1 {
+    @apply text-teal-700 dark:text-white text-[20px];
+  }
+  h2{
+    
+    @apply text-teal-700 dark:text-white text-[18px];
+
+  }
+h3{
+  @apply text-teal-700 dark:text-white text-[16px];
+
+
+}
+  h4,h5,h6{
+    @apply text-gray-800 dark:text-white text-[14px];
+  }
+

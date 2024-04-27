@@ -15,6 +15,8 @@ export class AllergiesService {
   userId: string | undefined = '';
   historyData = history;
 
+  
+
 
   constructor(
     private _http: HttpClient,

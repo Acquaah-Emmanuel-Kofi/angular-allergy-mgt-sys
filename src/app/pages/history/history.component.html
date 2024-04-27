@@ -85,7 +85,7 @@
     </div>
 
     <div class="flex flex-col gap-4 mb-4 8">
-      @for (history of history; track $index) {
+      @for (history of history.reverse(); track $index) {
       <app-historycard [id]="history.id" [historyData]="history" />
       }@empty {
       <div class="h-[200px] w-full flex justify-center items-center">

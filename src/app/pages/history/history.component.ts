@@ -26,6 +26,7 @@ export class HistoryComponent implements OnInit {
     this._allergies.getRecordedAllergy().subscribe({
       next: (response: any) => {
         this.history = response.data;
+        
         // console.log(this.history);
         
       },
