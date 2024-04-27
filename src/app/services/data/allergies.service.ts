@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { AuthenticationService } from '../auth/authentication.service';
-import { history } from '../../../assets/data/DummyData';
 import { History } from '../../interfaces/allergies.interface';
 
 
@@ -13,7 +12,7 @@ import { History } from '../../interfaces/allergies.interface';
 export class AllergiesService {
   allergyId = '';
   userId: string | undefined = '';
-  historyData = history;
+  historyData = History;
 
   
 

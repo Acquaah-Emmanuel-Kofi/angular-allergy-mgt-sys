@@ -1,18 +1,17 @@
-<div class="h-48 p-4 rounded bg-white dark:bg-gray-400">
-   <p class="mb-2 font-medium">FlUE INTERTIA</p>
-   <p class="text-px font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, officia.
-      Iure eos
-      ipsum totam
-      quod praesentium nisi! Maxime.</p>
-   <div class="flex items-center justify-between mt-4">
-      <span class="text-gray-400 font-medium dark:text-gray-700">just now</span>
-      <button class="flex items-center text-teal-400 dark:text-teal-300 font-medium hover:text-teal-400">
-         view
-         <svg class="w-6 h-5 mt-1 flex items-center text-teal-400 dark:text-teal-300 hover:text-teal-400"
-            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-               d="m9 5 7 7-7 7" />
-         </svg>
-      </button>
+<div class="flex justify-center items-center mt-[20px] md:ml-[100px] lg:ml-[280px]">
+   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-x-[270px] lg:gap-[280px] lg:mx-auto ">
+     <div *ngFor="let history of historyData; trackBy: trackById" class="bg-white dark:bg-gray-400 rounded-lg shadow-md w-[260px] h-[200px] p-4">
+       <div class="bg-teal-400 h-px w-full my-[20px]"></div>
+       <p class="text-sm font-normal break-words overflow-hidden text-ellipsis h-[80px]">{{ history.message }}</p>
+       <div class="flex items-center justify-between mt-4">
+         <span class="text-gray-400 font-medium dark:text-gray-700 text-sm">{{ history.date | date }}</span>
+         <button (click)="navigateToHistoryDetails(history.id)" type="button" class="flex items-center text-teal-400 dark:text-teal-300 font-medium hover:text-teal-400 text-sm">
+           View
+           <svg class="w-6 h-5 mt-1 flex items-center text-teal-400 dark:text-teal-300 hover:text-teal-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+           </svg>
+         </button>
+       </div>
+     </div>
    </div>
-</div>
+ </div>

@@ -17,10 +17,8 @@ export class HistorycardComponent {
 
   constructor(private router: Router) {}
 
-  starMsg(id:number) {
-   this.historyData.favorite = !this.historyData.favorite;
-   
-    
+  starMsg() {
+   this.historyData.favorite = !this.historyData.favorite; 
   }
 
   navigateToHistoryDetails() {
