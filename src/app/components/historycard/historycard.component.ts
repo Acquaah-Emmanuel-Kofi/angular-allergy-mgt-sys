@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class HistorycardComponent {
   @Input()
   historyData!: History;
-  @Output() onDelete: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onDelete: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private router: Router) {}
 
@@ -26,7 +26,7 @@ export class HistorycardComponent {
   }
 
   deleteItem() {
-    this.onDelete.emit(this.historyData.id);
+    this.onDelete.emit(this.historyData.id.toString());
   }
 
   

@@ -33,6 +33,13 @@ export class AllergiesService {
     );
   }
 
+
+  deleteItem(id: string): Observable<any> {
+    return this._http.delete<any>(
+      `${environment.BACKEND_API_BASE_URL}/allergy/delete/${id}`
+    )
+  }
+
   getALlergyDetails(id?:string): Observable<any> {
     return this._http.get<any>(`${environment.BACKEND_API_BASE_URL}/allergy/history/my-allergy/${id}`
     )

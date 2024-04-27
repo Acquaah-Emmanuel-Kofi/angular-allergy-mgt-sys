@@ -32,8 +32,7 @@ export class HistoryComponent implements OnInit {
     this.showStarredOnly = !this.showStarredOnly;
     if (this.showStarredOnly) {
       this.history = this.history.filter((item) => item.favorite === true);
-    } 
-    else {
+    } else {
       this._allergies.getRecordedAllergy().subscribe({
         next: (response: any) => this.history = response.data,
         error: (err) => console.log(err),
@@ -41,8 +40,11 @@ export class HistoryComponent implements OnInit {
     }
   }
 
-  deleteItem(id: number) {
-    this.history = this.history.filter((item) => item.id !== id);
+  deleteItem(id: string) {
+    this._allergies.deleteItem(id).subscribe({
+      next: () => this.history = this.history.filter((item) => item.id.toString() !== id),
+      error: (err) => console.log(err),
+    });
   }
 
   
