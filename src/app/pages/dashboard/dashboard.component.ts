@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.randomFact_1 = this.getFact();
-    this.randomFact_2 = this.getFact();
+    this.randomFact_2 = this.getFact();    
   }
 
   allergyFacts: AllergyFact[] = allergyFacts;

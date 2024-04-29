@@ -42,6 +42,10 @@
               <div
                 class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
               >
+
+              @if (ProfilePicture) {
+                <img [src]="ProfilePicture" alt="">
+              }@else {
                 <svg
                   class="absolute w-12 h-12 text-gray-400 -left-1"
                   fill="currentColor"
@@ -54,6 +58,9 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
+              }
+
+
               </div>
             </button>
           </div>
@@ -63,13 +70,12 @@
           >
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-gray-900 dark:text-white" role="none">
-                Neil Sims
-              </p>
+               {{Firstname + " " + Lastname}}
               <p
                 class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
                 role="none"
               >
-                neil.sims at allergus.com
+                {{email}}
               </p>
             </div>
             <ul class="py-1" role="none">

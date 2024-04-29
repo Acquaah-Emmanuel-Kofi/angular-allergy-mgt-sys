@@ -12,6 +12,10 @@ import { checkUsernameValidator } from '../../../utility/validators/auth/usernam
 import { ToasterService } from '../../../components/toaster/services/toaster.service';
 import { AuthenticationService } from '../../../services/auth/authentication.service';
 import { RememberMeService } from '../../../services/auth/remember-me.service';
+import { ACCESS_TOKEN_KEY, USERID_KEY, USERNAME_KEY } from '../../../utility/constants/auth.constants';
+import { lastValueFrom, pipe } from 'rxjs';
+
+declare const google: any;
 
 @Component({
   selector: 'app-login',
@@ -27,6 +31,12 @@ import { RememberMeService } from '../../../services/auth/remember-me.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
+
+ public Picture: any;
+  FirstName!: string;
+  LastName!: string;
+  Email!: string;
+
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
@@ -37,6 +47,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveStoredCredentials();
+    google.accounts.id.initialize({
+      client_id: '803653066602-dqr5thv97mdq9rgk9t79u7c6ljr8mn3e.apps.googleusercontent.com',
+      callback: (response: any) => this.handleCallbackResponse(response),
+      
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById('google-button'),
+      { 
+        theme: 'outline', 
+        size: 'large',
+        width: '500px',
+        height: '50px',
+       }
+    )
+
   }
 
   formIsValid = signal(true);
@@ -143,4 +169,35 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-}
+
+  decodeJWTToken(token: any) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(atob(base64));
+    } catch (error) {
+      console.error('Error decoding JWT token:', error);
+      return null;
+    }
+  }
+
+
+
+ 
+  
+  handleCallbackResponse(res: any){
+      const response = this.decodeJWTToken(res.credential);
+      localStorage.setItem(ACCESS_TOKEN_KEY, res.credential);
+      localStorage.setItem(USERNAME_KEY, response.given_name)
+      localStorage.setItem(USERID_KEY, response.jti)
+      sessionStorage.setItem('loggedInUser',JSON.stringify(response));
+      
+      window.location.href = '/dashboard';
+    }
+    
+
+
+
+  }
+
+

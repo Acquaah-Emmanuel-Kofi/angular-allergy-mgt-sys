@@ -14,6 +14,8 @@ import {
   decryptData,
   encryptData,
 } from '../../utility/constants/auth.constants';
+import { User } from '../../interfaces/allergies.interface';
+
 
 @Injectable({
   providedIn: 'root',
@@ -56,19 +58,61 @@ export class AuthenticationService {
     this.saveUserDeatils(encryptedToken);
   }
 
-  getAccessToken(): String | null {
-    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
 
-    if (token) {
-      const decryptedToken = decryptData(token);
-      return decryptedToken;
+   getPicture(){
+    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
+    if (hold) {
+   const picture = decodeJwt(hold);
+    return picture?.payload.picture;
+      
     }
 
-    return null;
-  }
+   }
 
+   getName(){
+    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
+    if (hold) {
+   const picture = decodeJwt(hold);
+    return picture?.payload.given_name;
+      
+    }
+    
+   }
+
+   getEmail(){
+    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
+    if (hold) {
+   const picture = decodeJwt(hold);
+    return picture?.payload.email;
+      
+    }
+    
+   }
+   getLastName(){
+    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
+    if (hold) {
+   const picture = decodeJwt(hold);
+    return picture?.payload.family_name;
+      
+    }
+    
+   }
+
+
+
+  getAccessTokenn(): string | null {
+		const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+		if (token) {
+			const decryptToken = decryptData(token);
+			return decryptToken;
+		}
+
+		return null;
+	}
   isLoggedIn(): boolean {
-    const token = this.getAccessToken();
+    const token = this.getAccessTokenn();
+
     return token ? true : false;
   }
 
@@ -76,18 +120,24 @@ export class AuthenticationService {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USERID_KEY);
     localStorage.removeItem(USERNAME_KEY);
+    localStorage.removeItem('picture');
     this._router.navigateByUrl('/login');
   }
 
   getUserDeatils() {
     const userIdFromLocalStorage = localStorage.getItem(USERID_KEY);
     const usernameFromLocalStorage = localStorage.getItem(USERNAME_KEY);
-
+  
+    // console.log("before if",userIdFromLocalStorage,usernameFromLocalStorage);
+    
+   
     if (userIdFromLocalStorage !== null && usernameFromLocalStorage !== null) {
       const userId = decryptData(userIdFromLocalStorage);
       const username = decryptData(usernameFromLocalStorage);
+      // console.log( "After if",userId,username);
+      
 
-      return { userId, username };
+      return {userId, username ,};
     }
 
     return null;

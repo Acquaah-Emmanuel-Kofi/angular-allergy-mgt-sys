@@ -18,6 +18,7 @@ import { ToasterService } from '../../components/toaster/services/toaster.servic
 })
 export class ProfileComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
+  firstName!: string;
 
   isLoading = signal(false);
 
@@ -25,7 +26,11 @@ export class ProfileComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _authService: AuthenticationService,
     private _toast: ToasterService
-  ) {}
+  ) {
+    this.firstName = this._authService.getName();
+    console.log(this.firstName);
+    
+  }
 
   ngOnInit(): void {
     this.fetchUserDetails();
