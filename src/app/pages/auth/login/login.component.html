@@ -18,7 +18,7 @@
 
     <h3 class="text-black font-bold text-xl">Sign In</h3>
     <p class="text-sm mb-4 mt-2">Hello there! Glad to have you back.</p>
-    <form [formGroup]="form" (ngSubmit)="login()">
+    <form [formGroup]="form" (ngSubmit)="login()" class="mb-[10px]">
       <div class="mb-4">
         <label
           for="username"
@@ -114,5 +114,7 @@
         <a routerLink="/register" class="text-teal-500">Register</a>
       </p>
     </form>
+    <p class="text-center my-[30px]">Or</p>
+    <button class="bg-white border border-teal-300 text-gray-900 text-sm font-medium rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5">Login with Google</button>
   </div>
 </section>

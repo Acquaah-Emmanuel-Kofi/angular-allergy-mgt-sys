@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { AuthenticationService } from '../auth/authentication.service';
@@ -14,13 +14,11 @@ export class AllergiesService {
   userId: string | undefined = '';
   historyData = History;
 
-  
+  private _http = inject(HttpClient);
+  private _authService = inject(AuthenticationService);
 
 
-  constructor(
-    private _http: HttpClient,
-    private _authService: AuthenticationService
-  ) {
+  constructor() {
     this.userId = this._authService.getUserDeatils()?.userId;
   }
 
@@ -34,14 +32,14 @@ export class AllergiesService {
   }
 
 
-  deleteItem(id: string): Observable<any> {
-    return this._http.delete<any>(
+  deleteItem(id: string): Observable<History> {
+    return this._http.delete<History>(
       `${environment.BACKEND_API_BASE_URL}/allergy/delete/${id}`
     )
   }
 
-  getALlergyDetails(id?:string): Observable<any> {
-    return this._http.get<any>(`${environment.BACKEND_API_BASE_URL}/allergy/history/my-allergy/${id}`
+  getALlergyDetails(id?:string): Observable<History> {
+    return this._http.get<History>(`${environment.BACKEND_API_BASE_URL}/allergy/history/my-allergy/${id}`
     )
   
   }
