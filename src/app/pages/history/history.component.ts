@@ -12,7 +12,7 @@ import { HistorycardComponent } from '../../components/historycard/historycard.c
 })
 export class HistoryComponent implements OnInit {
   appName = 'Aller Gus';
-  history: History[] = [];
+  history?: History[] = [];
   showStarredOnly = false;
 
   constructor(private _allergies: AllergiesService) {}
@@ -23,7 +23,7 @@ export class HistoryComponent implements OnInit {
         this.history = response.data;
       },
       error: (err) => {
-        console.log(err);
+        console.log("Getting Allergy Error ",err);
       },
     });
   }
@@ -31,7 +31,7 @@ export class HistoryComponent implements OnInit {
   filterStarredHistory() {
     this.showStarredOnly = !this.showStarredOnly;
     if (this.showStarredOnly) {
-      this.history = this.history.filter((item) => item.favorite === true);
+      this.history = this.history?.filter((item) => item.favorite === true);
     } else {
       this._allergies.getRecordedAllergy().subscribe({
         next: (response: any) => this.history = response.data,
@@ -42,7 +42,7 @@ export class HistoryComponent implements OnInit {
 
   deleteItem(id: string) {
     this._allergies.deleteItem(id).subscribe({
-      next: () => this.history = this.history.filter((item) => item.id.toString() !== id),
+      next: () => this.history = this.history?.filter((item) => item.id.toString() !== id),
       error: (err) => console.log(err),
     });
   }

@@ -19,6 +19,9 @@ import { ToasterService } from '../../components/toaster/services/toaster.servic
 export class ProfileComponent implements OnInit {
   imageUrl: string | ArrayBuffer | null = null;
   firstName!: string;
+  LastName!: string;
+  Email!: string;
+ 
 
   isLoading = signal(false);
 
@@ -27,8 +30,10 @@ export class ProfileComponent implements OnInit {
     private _authService: AuthenticationService,
     private _toast: ToasterService
   ) {
-    this.firstName = this._authService.getName();
-    console.log(this.firstName);
+    // this.firstName = this._authService.getName();
+    // this.LastName = _authService.getLastName();
+    // this.Email =_authService.getEmail();
+    
     
   }
 
@@ -37,12 +42,12 @@ export class ProfileComponent implements OnInit {
   }
 
   form = this._formBuilder.group({
-    firstname: [''],
-    lastname: [''],
+    firstname: [`${this.firstName}`],
+    lastname: [`${this.LastName}`],
     dateOfBirth: [''],
     gender: [''],
-    username: ['', checkUsernameValidator()],
-    email: ['', Validators.email],
+    username: [`${this.firstName} || "username"`, checkUsernameValidator()],
+    email: [`${this.Email} || "email"`, Validators.email],
   });
 
   get username() {

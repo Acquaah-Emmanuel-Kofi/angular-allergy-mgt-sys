@@ -14,8 +14,6 @@ import {
   decryptData,
   encryptData,
 } from '../../utility/constants/auth.constants';
-import { User } from '../../interfaces/allergies.interface';
-
 
 @Injectable({
   providedIn: 'root',
@@ -58,99 +56,70 @@ export class AuthenticationService {
     this.saveUserDeatils(encryptedToken);
   }
 
+  getPicture() {
+    return this.getDecodedPayload()?.picture;
+  }
 
-   getPicture(){
-    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
-    if (hold) {
-   const picture = decodeJwt(hold);
-    return picture?.payload.picture;
-      
+  getName() {
+    return this.getDecodedPayload()?.given_name;
+  }
+
+  getEmail() {
+    return this.getDecodedPayload()?.email;
+  }
+
+  getLastName() {
+    return this.getDecodedPayload()?.family_name;
+  }
+
+  getAccessToken(): string | null {
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+
+    if (token) {
+      try {
+        const decryptedToken = decryptData(token);
+        return decryptedToken;
+      } catch (error) {
+        console.error('Error decrypting access token:', error);
+        return null;
+      }
     }
 
-   }
+    return null;
+  }
 
-   getName(){
-    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
-    if (hold) {
-   const picture = decodeJwt(hold);
-    return picture?.payload.given_name;
-      
-    }
-    
-   }
-
-   getEmail(){
-    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
-    if (hold) {
-   const picture = decodeJwt(hold);
-    return picture?.payload.email;
-      
-    }
-    
-   }
-   getLastName(){
-    const hold : string = localStorage.getItem(ACCESS_TOKEN_KEY)  as string;
-    if (hold) {
-   const picture = decodeJwt(hold);
-    return picture?.payload.family_name;
-      
-    }
-    
-   }
-
-
-
-  getAccessTokenn(): string | null {
-		const token = localStorage.getItem(ACCESS_TOKEN_KEY);
-
-		if (token) {
-			const decryptToken = decryptData(token);
-			return decryptToken;
-		}
-
-		return null;
-	}
   isLoggedIn(): boolean {
-    const token = this.getAccessTokenn();
-
-    return token ? true : false;
+    const token = this.getAccessToken();
+    return !!token;
   }
 
   logoutUser(): void {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(USERID_KEY);
     localStorage.removeItem(USERNAME_KEY);
-    localStorage.removeItem('picture');
     this._router.navigateByUrl('/login');
   }
 
   getUserDeatils() {
     const userIdFromLocalStorage = localStorage.getItem(USERID_KEY);
     const usernameFromLocalStorage = localStorage.getItem(USERNAME_KEY);
-  
-    // console.log("before if",userIdFromLocalStorage,usernameFromLocalStorage);
-    
-   
+
     if (userIdFromLocalStorage !== null && usernameFromLocalStorage !== null) {
       const userId = decryptData(userIdFromLocalStorage);
       const username = decryptData(usernameFromLocalStorage);
-      // console.log( "After if",userId,username);
-      
 
-      return {userId, username ,};
+      return { userId, username };
     }
 
     return null;
   }
 
-  saveUserDeatils(accessToken: string): void {
+  private saveUserDeatils(accessToken: string): void {
     const decryptedAccessToken = decryptData(accessToken);
 
     if (decryptedAccessToken) {
-      // Decode the JWT token
       const decodedToken: DecodedToken | null = decodeJwt(decryptedAccessToken);
 
-      // Access the data from the payload
       if (decodedToken) {
         const payloadData = decodedToken.payload;
 
@@ -161,5 +130,17 @@ export class AuthenticationService {
         localStorage.setItem(USERNAME_KEY, encryptedUsername);
       }
     }
+  }
+
+  private getDecodedPayload(): any {
+    const token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    if (token) {
+      const decryptedToken = decryptData(token);
+      if (decryptedToken) {
+        const decodedToken = decodeJwt(decryptedToken);
+        return decodedToken?.payload;
+      }
+    }
+    return null;
   }
 }

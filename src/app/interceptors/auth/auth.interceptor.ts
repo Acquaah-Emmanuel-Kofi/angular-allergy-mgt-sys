@@ -15,7 +15,7 @@ export const authInterceptor: HttpInterceptorFn = (
 ) => {
   let router = inject(Router);
   let authService = inject(AuthenticationService);
-  const authToken = authService.getAccessTokenn();
+  const authToken = authService.getAccessToken();
 
   // If an access token is available, add it to the request headers
   if (authToken) {

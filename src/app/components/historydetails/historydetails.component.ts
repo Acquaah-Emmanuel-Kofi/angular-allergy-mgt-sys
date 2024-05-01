@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./historydetails.component.scss'],
   providers: [AllergiesService,provideMarkdown(),provideMarkdown({ loader: HttpClient }),
     provideMarkdown({
-      markedOptions: {
+        markedOptions: {
         provide: MARKED_OPTIONS,
         useFactory: markedOptionsFactory,
       },

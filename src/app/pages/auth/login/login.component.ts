@@ -12,8 +12,9 @@ import { checkUsernameValidator } from '../../../utility/validators/auth/usernam
 import { ToasterService } from '../../../components/toaster/services/toaster.service';
 import { AuthenticationService } from '../../../services/auth/authentication.service';
 import { RememberMeService } from '../../../services/auth/remember-me.service';
-import { ACCESS_TOKEN_KEY, USERID_KEY, USERNAME_KEY } from '../../../utility/constants/auth.constants';
+import { ACCESS_TOKEN_KEY, USERID_KEY, USERNAME_KEY, } from '../../../utility/constants/auth.constants';
 import { lastValueFrom, pipe } from 'rxjs';
+import {environment} from '../../../../environments/environment.development'
 
 declare const google: any;
 
@@ -32,11 +33,6 @@ declare const google: any;
 })
 export class LoginComponent implements OnInit {
 
- public Picture: any;
-  FirstName!: string;
-  LastName!: string;
-  Email!: string;
-
   constructor(
     private _router: Router,
     private _formBuilder: FormBuilder,
@@ -48,7 +44,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.retrieveStoredCredentials();
     google.accounts.id.initialize({
-      client_id: '803653066602-dqr5thv97mdq9rgk9t79u7c6ljr8mn3e.apps.googleusercontent.com',
+      client_id: environment.O_AUTH,
       callback: (response: any) => this.handleCallbackResponse(response),
       
     });
@@ -109,8 +105,8 @@ export class LoginComponent implements OnInit {
           if (response.status === 'success') {
             this._authService.saveToken(response.token);
             this.form.reset();
-            this._toast.showSuccess('Login Sucessful!');
-            this._router.navigate(['/dashboard']);
+            this._toast.showSuccess('Login Sucessful!');       
+            this._router.navigate(['/dashboard']); 
           } else if (response.status === 'error') {
             this._toast.showError('User does not exists!');
           } else {

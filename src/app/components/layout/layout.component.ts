@@ -3,8 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../../services/theme/theme.service';
 import { LogoComponent } from '../../shared/logo/logo.component';
 import { AuthenticationService } from '../../services/auth/authentication.service';
-import { ACCESS_TOKEN_KEY, PICTURE, USERNAME_KEY, decodeJwt } from '../../utility/constants/auth.constants';
-import { ProfileService } from '../../services/profile/profile.service';
+
 
 
 @Component({
@@ -25,8 +24,8 @@ export class LayoutComponent {
 
     
   constructor(public _themeService: ThemeService, private _authService: AuthenticationService) { 
-   this.ProfilePicture = _authService.getPicture();
-   this.Firstname = _authService.getName();
+   this.ProfilePicture = _authService.getPicture() ;
+   this.Firstname = _authService.getName() || this._authService.getUserDeatils()?.username ;
    this.email = _authService.getEmail();
    this.Lastname = _authService.getLastName();
    

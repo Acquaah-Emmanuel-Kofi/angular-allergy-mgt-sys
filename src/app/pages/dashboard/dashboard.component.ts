@@ -15,8 +15,8 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 export class DashboardComponent implements OnInit {
   constructor(private _router: Router, private _authService: AuthenticationService) {}
 
-  // Retrieve username from token
-  username = this._authService.getUserDeatils()?.username;
+  
+  username = this._authService.getUserDeatils()?.username || this._authService.getName();
 
   randomFact_1 = this.getFact();
   randomFact_2 = this.getFact();
