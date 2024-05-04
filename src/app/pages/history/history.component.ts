@@ -14,12 +14,26 @@ export class HistoryComponent implements OnInit {
   appName = 'Aller Gus';
   history: History[] = [];
   showStarredOnly = false;
+  isLoading = false;
 
   constructor(private _allergies: AllergiesService) {}
 
   ngOnInit() {
-    this._allergies.getRecordedAllergy().subscribe((response: any) => {
-      this.history = response.data;
+    this.getHistoryAllergies();
+  }
+
+  getHistoryAllergies() {
+    this.isLoading = true;
+
+    this._allergies.getRecordedAllergy().subscribe({
+      next: (response: any) => {
+        this.isLoading = false;
+
+        this.history = response.data;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 
@@ -29,7 +43,7 @@ export class HistoryComponent implements OnInit {
       this.history = this.history.filter((item) => item.favorite === true);
     } else {
       this._allergies.getRecordedAllergy().subscribe({
-        next: (response: any) => this.history = response.data,
+        next: (response: any) => (this.history = response.data),
         error: (err) => console.log(err),
       });
     }
@@ -37,10 +51,11 @@ export class HistoryComponent implements OnInit {
 
   deleteItem(id: string) {
     this._allergies.deleteItem(id).subscribe({
-      next: () => this.history = this.history.filter((item) => item.id.toString() !== id),
+      next: () =>
+        (this.history = this.history.filter(
+          (item) => item.id.toString() !== id
+        )),
       error: (err) => console.log(err),
     });
   }
-
-  
 }

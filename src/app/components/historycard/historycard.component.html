@@ -13,7 +13,7 @@
         <button type="button"
             class="py-1.5 px-8 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-teal-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-teal-700" (click)="navigateToHistoryDetails()"  >Open</button>
         <button type="button"
-            class="text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-8 py-1.5 text-center me-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800" (click)="onDelete.emit(historyData.id.toString())">Delete</button>
+            class="text-white bg-teal-700 hover:bg-teal-800 focus:outline-none focus:ring-4 focus:ring-teal-300 font-medium rounded-full text-sm px-8 py-1.5 text-center me-2 mb-2 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800" (click)="onDelete.emit(historyData.id.toString())">{{isDeleting ? 'Deleting...' : 'Delete'}}</button>
     </div>
     <div class="flex items-center gap-4">
         <button 

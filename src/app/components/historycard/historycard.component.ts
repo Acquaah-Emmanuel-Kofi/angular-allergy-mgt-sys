@@ -15,6 +15,8 @@ export class HistorycardComponent {
   historyData!: History;
   @Output() onDelete: EventEmitter<string> = new EventEmitter<string>();
 
+  isDeleting: boolean = false;
+
   constructor(private router: Router) {}
 
   starMsg() {
@@ -26,6 +28,7 @@ export class HistorycardComponent {
   }
 
   deleteItem() {
+    this.isDeleting = true;
     this.onDelete.emit(this.historyData.id.toString());
   }
 

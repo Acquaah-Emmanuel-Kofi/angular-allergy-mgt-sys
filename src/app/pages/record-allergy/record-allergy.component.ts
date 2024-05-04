@@ -27,6 +27,8 @@ export class RecordAllergyComponent {
   progressCount: number = 33.33333333333333;
   progress: number = 0;
 
+  isLoading: boolean = false;
+
   constructor(
     private _router: Router,
     private _toast: ToasterService,
@@ -68,15 +70,24 @@ export class RecordAllergyComponent {
   }
 
   submitForm(): void {
+    this.isLoading = true;
+
     this._allergyService.sendAllergyData(this.formData).subscribe({
       next: (response) => {
+        console.log("Response: ", response);
+        
+        this.isLoading = false;
+
         if (response.status === 'success') {
           this._toast.showSuccess('Success!');
           this._router.navigateByUrl('/history');
+        } else {
+          this._toast.showError('Allergy Failed TO Submit!');
         }
       },
       error: (err) => {
-        this._toast.showSuccess(err.message);
+        this.isLoading = false;
+        this._toast.showError(err.message);
       },
     });
   }
@@ -87,19 +98,16 @@ export class RecordAllergyComponent {
     const selectedValue = target.value;
     const isChecked = target.checked;
 
-    let data = '';
 
     if (isChecked) {
       // Append the selected value to the string
-      data += selectedValue + ', ';
+      this.experiencedSymptomsList += selectedValue + ', ';
     } else if (!isChecked && selectedValue) {
       // Replace the selected value with an empty string
-      data = data.replace(selectedValue + ', ', '');
+      this.experiencedSymptomsList = this.experiencedSymptomsList.replace(selectedValue + ', ', '');
     }
 
-    console.log(data);
 
-    return data;
   }
 
   handleSymptomsOccuredChange(event: Event) {
@@ -118,6 +126,5 @@ export class RecordAllergyComponent {
       );
     }
 
-    console.log(this.experiencedSymptomsList);
   }
 }

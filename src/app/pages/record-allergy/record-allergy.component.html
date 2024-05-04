@@ -39,7 +39,7 @@
       } @case (3) {
       <app-form-step3 [form]="formData" [handleCheckboxChange]="handleSymptomsOccuredChange" (prevStepForm)="prevStep()" (nextStepForm)="nextStep()"></app-form-step3>
       } @case (4) {
-      <app-form-step4 [form]="formData" (prevStepForm)="prevStep()" (submitForm)="submitForm()"></app-form-step4>
+      <app-form-step4 [form]="formData" (prevStepForm)="prevStep()" (submitForm)="submitForm()" [isLoading]="isLoading"></app-form-step4>
       } }
     </form>
   </div>

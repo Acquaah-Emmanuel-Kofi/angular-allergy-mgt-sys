@@ -13,6 +13,7 @@ export class FormStep4Component {
   @Output() submitForm: EventEmitter<any> = new EventEmitter();
   @Output() prevStepForm: EventEmitter<any> = new EventEmitter();
   @Input() form!: FormData;
+  @Input() isLoading: boolean = false;
 
   constructor() {}
 

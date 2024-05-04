@@ -3,13 +3,15 @@
     <div id="header" class="flex justify-between items-center">
       <div class="flex items-center gap-4">
         <label for="histories" class="font-medium dark:text-white"
-          >{{history.length}} History found!</label
+          >{{ history.length }} History found!</label
         >
-    
+
         <button
           type="button"
           (click)="filterStarredHistory()"
-          [class.bg-teal-700]="showStarredOnly" [class.hover:bg-teal-800]="showStarredOnly" [class.text-white]="showStarredOnly"
+          [class.bg-teal-700]="showStarredOnly"
+          [class.hover:bg-teal-800]="showStarredOnly"
+          [class.text-white]="showStarredOnly"
           class="text-gray-900 bg-gray-100 hover:bg-gray-200 font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center dark:bg-gray-600 dark:text-white me-2 mb-2"
         >
           <svg
@@ -31,20 +33,28 @@
           Starred
         </button>
       </div>
-
-
     </div>
 
     <div class="flex flex-col gap-4 mb-4 8 mt-[20px]">
-      @for (history of history.reverse(); track $index) {
-      <app-historycard [id]="history.id" [historyData]="history" (onDelete)="deleteItem($event)" />
-      }@empty {
-      <div class="h-[200px] w-full flex justify-center items-center">
-        <h1>No Allergy Recorded Yet.</h1>
-      </div>
+      @if (isLoading) {
+        <div class="h-[200px] w-full flex justify-center items-center">
+          <h1>Loading...</h1>
+        </div>
+      }@else {
+        @for (history of history.reverse(); track $index) {
+          <app-historycard
+            [id]="history.id"
+            [historyData]="history"
+            (onDelete)="deleteItem($event)"
+          />
+          }@empty {
+          <div class="h-[200px] w-full flex justify-center items-center">
+            <h1>No Allergy Recorded Yet.</h1>
+          </div>
+          } 
       }
     </div>
-    @if (history.length > 0) {
+    @if (history.length > 8) {
     <div class="flex justify-center items-center">
       <div aria-label="Page navigation example">
         <ul class="inline-flex -space-x-px text-sm">
