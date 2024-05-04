@@ -95,13 +95,8 @@ export class ProfileComponent implements OnInit {
   }
 
   fetchUserDetails() {
-    this._authService.getUserProfileDetails().subscribe({
-      next: (details) => {
-        this.form.setValue(details);
-      },
-      error: (error) => {
-        this._toast.showError(error);
-      },
+    this._authService.getUserProfileDetails().subscribe((details) => {
+      this.form.setValue(details);
     });
   }
 }
