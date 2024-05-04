@@ -19,7 +19,7 @@ export class RecenthistorycardComponent implements OnInit {
   ngOnInit(): void {
     this.allergiesService.getRecordedAllergy().subscribe({
       next: (response: any) => {
-        this.historyData = response.data.reverse().slice(0, 3);
+        this.historyData = response?.data?.reverse()?.slice(0, 3);
       }
     });
   }
