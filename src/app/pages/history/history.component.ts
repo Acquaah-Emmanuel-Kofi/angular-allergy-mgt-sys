@@ -18,13 +18,8 @@ export class HistoryComponent implements OnInit {
   constructor(private _allergies: AllergiesService) {}
 
   ngOnInit() {
-    this._allergies.getRecordedAllergy().subscribe({
-      next: (response: any) => {
-        this.history = response.data;
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    this._allergies.getRecordedAllergy().subscribe((response: any) => {
+      this.history = response.data;
     });
   }
 
