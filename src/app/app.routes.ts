@@ -7,15 +7,28 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { HistorydetailsComponent } from './components/historydetails/historydetails.component';
+import { authGuard } from './auth-guard/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: LandingPageComponent }, // Default route
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'record-allergy', component: RecordAllergyComponent },
-    { path: 'history', component: HistoryComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'history/details/:id', component: HistorydetailsComponent },
-    {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
-  ];
+  { path: '', component: LandingPageComponent }, // Default route
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'record-allergy',
+    component: RecordAllergyComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'history', component: HistoryComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'history/details/:id',
+    component: HistorydetailsComponent,
+    canActivate: [authGuard],
+  },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+];
