@@ -1,4 +1,11 @@
 # Allergy Management System v.1.1
+view live project here instead > https://allergus.vercel.app/login
+
+Login in with the below credentials {{Beckend for receiving allergy response not hosted yet but}}
+'''
+username: esther smith
+password: Esther@123
+'''
 This Webapp is a Takoradi Technical University School project which was supervised by Mr. French Abeiku during our Advanced Java lecture periods
 
 
